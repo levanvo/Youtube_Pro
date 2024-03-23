@@ -43,21 +43,21 @@ export const LOGIN = async (req, res, next) => {
                         accessToken:accessToken,
                         isNewUser:true
                     };
-                    
+                    // console.log("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{response: ",response);
                     const checkEmail = await Model_User.findOne({email:object_User.email});
 
                     if(checkEmail){
                         const data = await Model_User.findByIdAndUpdate({_id:checkEmail._id}, {...object_User, isNewUser:false}, {new:true});
-                        console.log("data-Old: ",data);
-                        res.redirect('http://localhost:5173/homePage');
+                        // console.log("data-Old: ",data);
+                        res.redirect('http://localhost:5173/youtube.com');
                         return Promise.resolve({
                             message:"data-User-old accessed.",
                             data
                         });
                     }else{
                         const data = await Model_User.create({...object_User, scopes:["user","trial"]});
-                        console.log("data-New: ",data);
-                        res.redirect('http://localhost:5173/homePage');
+                        // console.log("data-New: ",data);
+                        res.redirect('http://localhost:5173/youtube.com');
                         return Promise.resolve({
                             message:"data-User-new accessed.",
                             data

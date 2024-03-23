@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login/Login";
 import HomePage from "./Web/HomePage";
 import Layout_web from "./Web/Layout_web/Layout_web";
+import NotFound from "./Web/Layout_web/NotFound";
 
 
 function App() {
@@ -14,9 +15,11 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
 
-      <Route path="/homePage" element={<Layout_web />}>
+      <Route path="/youtube.com" element={<Layout_web />}>
         <Route index element={<HomePage />} />
       </Route>
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

@@ -5,10 +5,10 @@ import Footer from './Footer'
 
 const Layout_web = () => {
     return (
-        <div>
+        <div className=''>
             <Header />
             <Outlet />
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

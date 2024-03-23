@@ -1,0 +1,39 @@
+.herder-shell-ouside {
+    position: sticky;
+    top: 0;
+
+    .shell-youtube-icon {
+
+        .youtube-icon {
+            color: red;
+            scale: 3.5;
+        }
+    }
+
+    .shell-search {
+
+        .ant-space-item {
+
+            .ant-input-affix-wrapper {
+                height: 35px;
+            }
+
+            .ant-input-group-addon {
+                scale: 1.12;
+                padding: 0 0 0 4px;
+
+                button{width: 50px;}
+            }
+        }
+    }
+}
+
+.home-shell-outside {
+    user-select: none;
+
+    .shell-1 {
+        position: sticky;
+        top: 64px;
+    }
+
+}

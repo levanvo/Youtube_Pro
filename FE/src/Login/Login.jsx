@@ -1,6 +1,6 @@
 import React from 'react'
 import GoogleButton from "react-google-button";
-import FacebookLogin from 'react-facebook-login';
+// import FacebookLogin from 'react-facebook-login';
 import "./login.css"
 
 const Login = () => {
