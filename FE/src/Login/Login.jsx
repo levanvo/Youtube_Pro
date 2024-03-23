@@ -1,6 +1,8 @@
 import React from 'react'
 import GoogleButton from "react-google-button";
-import "./login.scss"
+import FacebookLogin from 'react-facebook-login';
+import "./login.css"
+
 const Login = () => {
 
     const _handleGoogleLogin = () => {
@@ -14,11 +16,15 @@ const Login = () => {
     };
 
     return (
-        <div className="Area_Login">
-            <div className="flex justify-center mt-20">
-                <GoogleButton onClick={_handleGoogleLogin} />
+        <div className="Area_Login bg-gray-300 h-[100vh] flex justify-center space-x-16">
+            <div className=" pt-6 mt-16 w-[350px] h-[250px] scale-[80%] rounded-xl bg-gray-100 opacity-[80%] shadow-md shadow-gray-300 duration-200">
+                <h1 className='text-center text-[160%] mb-5'>Sign-in</h1>
+                <div className="flex justify-center">
+                    <GoogleButton onClick={_handleGoogleLogin} style={{ opacity: 1 }} />
+                </div>
             </div>
         </div>
+
     )
 }
 
