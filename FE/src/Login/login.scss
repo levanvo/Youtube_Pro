@@ -1,4 +1,5 @@
 .Area_Login {
+  user-select: none;
   height: 100vh;
   width: 100vw;
   background-color: hsla(200, 40%, 30%, .4);
@@ -22,7 +23,13 @@
     110%,
     40%, 32%;
   animation: 100s para infinite linear;
+  .Sigin{
+    font-family: cursive;
+    color: rgb(44, 44, 44);
+  }
 }
+
+
 
 @keyframes para {
   100% {

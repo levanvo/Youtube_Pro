@@ -47,7 +47,7 @@ const HomePage = () => {
 
   return (
     <div className="flex home-shell-outside">
-      <div className=''>
+      <div className='home-nav-left'>
         <Menu
           defaultSelectedKeys={['1']}
           // defaultOpenKeys={['sub1']}
@@ -58,7 +58,7 @@ const HomePage = () => {
           className='h-[91vh] shell-1'
         />
       </div>
-      <div className="w-[100%] h-auto bg-gray-500 shell-2 p-2 rounded-md m-1">
+      <div className="home-nav-right w-[100%] h-auto bg-gray-500 shell-2 p-2 rounded-md m-1">
         <h1>to make or get something or someone ready for something that will happen in the future:</h1>
         <br />
         <h1>to make or get something or someone ready for something that will happen in the future:</h1>

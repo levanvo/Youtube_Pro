@@ -1,9 +1,9 @@
 import express from "express";
 import { LOGIN, LOGOUT } from "../controller/login.js";
 
-const routerUser = express.Router();
+const routerLogin = express.Router();
 
-routerUser.get("/",LOGIN);
-routerUser.get("/logout",LOGOUT);
+routerLogin.get("/",LOGIN);
+routerLogin.get("/logout",LOGOUT);
 
-export default routerUser;
+export default routerLogin;

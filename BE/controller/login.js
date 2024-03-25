@@ -2,6 +2,7 @@ import axios from "axios";
 import dotenv from "dotenv";
 import session  from "express-session";
 import Model_User from "../model/login.js"
+import jwt from 'jsonwebtoken';
 dotenv.config();
 
 const redirectUri = process.env.REDIRECT;
@@ -43,24 +44,28 @@ export const LOGIN = async (req, res, next) => {
                         accessToken:accessToken,
                         isNewUser:true
                     };
-                    // console.log("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{response: ",response);
                     const checkEmail = await Model_User.findOne({email:object_User.email});
 
                     if(checkEmail){
                         const data = await Model_User.findByIdAndUpdate({_id:checkEmail._id}, {...object_User, isNewUser:false}, {new:true});
-                        // console.log("data-Old: ",data);
+                        const secretKey = 'levanvo2k';
+                        const timeExpired = "6h";
+                        const token = jwt.sign({_id:data._id}, secretKey, { expiresIn: timeExpired });
                         res.redirect('http://localhost:5173/youtube.com');
-                        return Promise.resolve({
+                        return res.json({
                             message:"data-User-old accessed.",
-                            data
+                            data,
+                            token
                         });
                     }else{
                         const data = await Model_User.create({...object_User, scopes:["user","trial"]});
-                        // console.log("data-New: ",data);
+                        const secretKey = 'levanvo2k';
+                        const token = await jwt.sign({_id:data._id}, secretKey, { expiresIn: '6h' });
                         res.redirect('http://localhost:5173/youtube.com');
                         return Promise.resolve({
                             message:"data-User-new accessed.",
-                            data
+                            data,
+                            token
                         });
                     };
                 })

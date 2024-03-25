@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-import routerUser from "./router/login.js";
+import routerLogin from "./router/login.js";
+import routerUser from "./router/userProfile.js";
 import cors from "cors";
 import chalk from "chalk";
 import dotenv from "dotenv";
@@ -10,7 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/",routerUser);
+app.use("/",routerLogin);
+app.use("/",routerUser);
 
 mongoose.connect(process.env.DB_MONGO+"youtube2024")
     .then(()=>{

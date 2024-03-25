@@ -1,9 +1,9 @@
 .herder-shell-ouside {
+    user-select: none;
     position: sticky;
     top: 0;
 
     .shell-youtube-icon {
-
         .youtube-icon {
             color: red;
             scale: 3.5;
@@ -11,9 +11,12 @@
     }
 
     .shell-search {
+        .ant-space {
+            column-gap: 20px;
+            margin: 0;
+        }
 
         .ant-space-item {
-
             .ant-input-affix-wrapper {
                 height: 35px;
             }
@@ -22,18 +25,39 @@
                 scale: 1.12;
                 padding: 0 0 0 4px;
 
-                button{width: 50px;}
+                button {
+                    width: 50px;
+                    margin: 0;
+                }
             }
         }
+    }
+
+    .shell-right-herder {
+        .shell-r-1 {
+            .ant-btn {
+                margin: 17px 5px 0 0;
+            }
+        }
+
+        .shell-r-2 {
+
+            .shell-notification{
+                
+            }
+        }
+
     }
 }
 
 .home-shell-outside {
-    user-select: none;
+
+    .home-nav-left{
+        user-select: none;
+    }
 
     .shell-1 {
         position: sticky;
         top: 64px;
     }
-
 }

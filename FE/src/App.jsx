@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login/Login";
 import HomePage from "./Web/HomePage";
 import Layout_web from "./Web/Layout_web/Layout_web";
 import NotFound from "./Web/Layout_web/NotFound";
-
+import axios from "axios";
 
 function App() {
-
-
+  
 
   return (
     <Routes>
