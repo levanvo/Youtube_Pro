@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { AudioOutlined, CustomerServiceOutlined, DeploymentUnitOutlined, RiseOutlined, StarOutlined, BellOutlined } from '@ant-design/icons';
 import { Input, Space, Button, Tooltip, Avatar, Drawer } from 'antd';
+import url from "url";
+import querystring from "querystring";
 const { Search } = Input;
-
 
 
 const Header = () => {
@@ -14,20 +15,6 @@ const Header = () => {
   const [openHerderUser, setOpenHerder_User] = useState(false);
   const [user, setUser] = useState("Lucy");
   const [color, setColor] = useState("#f56a00");
-
-  useEffect(() => {
-    const fetchData = async () => {
-        try {
-          const code = "4%2F0AeaYSHD_N8psbMdYzx_qJq1Se8_ByLFJENLg1Cyo8Cy4XDnDeaqJSNSvhBwthDAoNcCDZQ";
-            const response = await axios.get(`http://localhost:3000/?code=${code}&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=none`);
-            console.log(" response====================>", response);
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-        }
-    };
-
-    fetchData();
-}, []);
 
   const onSearch = (value, _e, info) => console.log(info?.source, value);
   const enterLoading = (index) => {

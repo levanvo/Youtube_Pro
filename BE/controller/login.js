@@ -1,6 +1,6 @@
 import axios from "axios";
 import dotenv from "dotenv";
-import session  from "express-session";
+import session from "express-session";
 import Model_User from "../model/login.js"
 import jwt from 'jsonwebtoken';
 dotenv.config();
@@ -35,51 +35,78 @@ export const LOGIN = async (req, res, next) => {
             })
                 .then(async (userInfoResponse) => {
                     const userInfo = userInfoResponse.data;
-                    const object_User ={
-                        sub:userInfo.sub,
-                        name:userInfo.name,
-                        picture:userInfo.picture,
-                        email:userInfo.email,
-                        locale:userInfo.locale,
-                        accessToken:accessToken,
-                        isNewUser:true
+                    const object_User = {
+                        sub: userInfo.sub,
+                        name: userInfo.name,
+                        picture: userInfo.picture,
+                        email: userInfo.email,
+                        locale: userInfo.locale,
+                        accessToken: accessToken,
+                        isNewUser: true
                     };
-                    const checkEmail = await Model_User.findOne({email:object_User.email});
+                    const checkEmail = await Model_User.findOne({ email: object_User.email });
 
-                    if(checkEmail){
-                        const data = await Model_User.findByIdAndUpdate({_id:checkEmail._id}, {...object_User, isNewUser:false}, {new:true});
+                    if (checkEmail) {
+                        const data = await Model_User.findByIdAndUpdate({ _id: checkEmail._id }, { ...object_User, isNewUser: false }, { new: true });
                         const secretKey = 'levanvo2k';
-                        const timeExpired = "6h";
-                        const token = jwt.sign({_id:data._id}, secretKey, { expiresIn: timeExpired });
-                        res.redirect('http://localhost:5173/youtube.com');
-                        return res.json({
-                            message:"data-User-old accessed.",
+                        const token = jwt.sign({ _id: data._id }, secretKey, { expiresIn: "6h" });
+
+                        return Promise.resolve({
+                            message: "data-User-old accessed.",
                             data,
                             token
                         });
-                    }else{
-                        const data = await Model_User.create({...object_User, scopes:["user","trial"]});
+                    } else {
+                        const data = await Model_User.create({ ...object_User, scopes: ["user", "trial"] });
                         const secretKey = 'levanvo2k';
-                        const token = await jwt.sign({_id:data._id}, secretKey, { expiresIn: '6h' });
-                        res.redirect('http://localhost:5173/youtube.com');
+                        const token = jwt.sign({ _id: data._id }, secretKey, { expiresIn: '6h' });
                         return Promise.resolve({
-                            message:"data-User-new accessed.",
+                            message: "data-User-new accessed.",
                             data,
                             token
                         });
                     };
                 })
+                .then(({ data }) => {
+                    const createdAt = data.createdAt;
+                    const updatedAt = data.updatedAt;
+
+                    if (data.createdAt) { data.createdAt = createdAt.toString() };
+                    if (data.updatedAt) { data.updatedAt = updatedAt.toString() };
+
+                    const dataOriginal = {
+                        _id: data._id,
+                        sub: data.sub,
+                        name: data.name,
+                        picture: data.picture,
+                        email: data.email,
+                        locale: data.locale,
+                        accessToken: data.accessToken,
+                        isNewUser: data.isNewUser,
+                        scopes: data.scopes,
+                    };
+
+                    console.log(dataOriginal);
+                    const redirectUrl = 'http://localhost:5173/youtube.com';
+                    const queryData = new URLSearchParams(dataOriginal).toString();
+                    res.redirect(`${redirectUrl}?${queryData}`);
+                })
                 .catch(error => {
                     console.error('Error fetching user info:', error);
-                    res.status(500).send('Error fetching user info');
                 });
         })
         .catch(error => {
             console.error('Error fetching access token:', error);
-            res.status(500).send('Error fetching access token');
         });
 }
 
+export const redirect = async (req, res) => {
+    try {
+        return res.redirect('http://localhost:5173/youtube.com');
+    } catch {
+        return res.json("Error")
+    }
+}
 export const LOGOUT = async (req, res, next) => {
     // Xóa thông tin phiên đăng nhập hoặc token
     // Ví dụ: nếu bạn lưu token trong phiên, bạn có thể xóa nó bằng cách:
