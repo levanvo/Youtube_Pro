@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import "../../css/Home+Herder.scss";
+import "../../scss/Home+Herder.scss";
 import { FaYoutube } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import axios from "axios";
 import { AudioOutlined, CustomerServiceOutlined, DeploymentUnitOutlined, RiseOutlined, StarOutlined, BellOutlined } from '@ant-design/icons';
-import { Input, Space, Button, Tooltip, Avatar, Drawer } from 'antd';
-import url from "url";
-import querystring from "querystring";
+import { Input, Space, Button, Tooltip, Avatar, Drawer, Modal } from 'antd';
+import { get_SessionStorage } from '../../Services/Api';
 const { Search } = Input;
 
 
 const Header = () => {
+  const [Profile, setProfile] = useState({});
   const [loadings, setLoadings] = useState([]);
   const [openHerderUser, setOpenHerder_User] = useState(false);
-  const [user, setUser] = useState("Lucy");
-  const [color, setColor] = useState("#f56a00");
+  const [isModalOpen_logout, setIsModalOpen_logout] = useState(false);
 
   const onSearch = (value, _e, info) => console.log(info?.source, value);
   const enterLoading = (index) => {
@@ -32,6 +29,20 @@ const Header = () => {
     }, 600);
   };
 
+  const showModal_logout = () => {
+    setIsModalOpen_logout(true);
+  };
+  const handleOk_logout = () => {
+    sessionStorage.removeItem("user.profile");
+    window.location.href = window.location.origin;
+    setIsModalOpen_logout(false);
+  };
+
+  const handleCancel_logout = () => {
+    setIsModalOpen_logout(false);
+  };
+
+
   const showDrawer = () => {
     setOpenHerder_User(true);
   };
@@ -39,10 +50,15 @@ const Header = () => {
     setOpenHerder_User(false);
   };
 
+  useEffect(() => {
+    const data = get_SessionStorage("user.profile");
+    setProfile(data);
+  }, []);
+
   const dataHerderUser = () => {
     return <div className='h-[45px] flex space-x-2 float-right '>
-      <h2 className='leading-[42px]'>Le Van VoLe Van VoLe</h2>
-      <img className='w-[45px] rounded-full' src="https://hips.hearstapps.com/hmg-prod/images/beautiful-smooth-haired-red-cat-lies-on-the-sofa-royalty-free-image-1678488026.jpg?crop=0.88847xw:1xh;center,top&resize=1200:*" />
+      <h2 className='leading-[46px]'>{Profile?.name}</h2>
+      <img className='w-[45px] rounded-full' src={Profile?.picture} />
     </div>
   };
 
@@ -92,24 +108,23 @@ const Header = () => {
             <BellOutlined className='scale-150 text-gray-500 cursor-pointer' />
           </div>
           <div className="shell-profile -mt-[7px] flex space-x-1">
-            {/* <h1 className='mt-2'>Lucky</h1> */}
-            <Avatar onClick={showDrawer} style={{ backgroundColor: color, verticalAlign: 'middle', cursor: "pointer" }} size="large"> {user} </Avatar>
+            <Avatar onClick={showDrawer} style={{ verticalAlign: 'middle', cursor: "pointer" }} size="large"> {<img className='scale-125' src={Profile?.picture} />}  </Avatar>
             <Drawer title={dataHerderUser()} onClose={onClose} open={openHerderUser}>
+
               <p>Some contents...</p>
               <p>Some contents...</p>
               <p>Some contents...</p>
               <p>Some contents...</p>
-              <p>Some contents...</p>
+              <p className='hover:bg-red-500 bg-red-400 text-white text-center cursor-pointer p-2 rounded-md font-bold mt-[66vh]' onClick={() => showModal_logout()}>Log-out</p>
 
             </Drawer>
           </div>
         </div>
       </div>
+      <Modal title="Are you sure Sign-out ?" open={isModalOpen_logout} onOk={handleOk_logout} onCancel={handleCancel_logout}> </Modal>
 
     </div>
   )
 }
 
 export default Header
-// http://localhost:3000/?code=4%2F0AeaYSHCKcRhgdRwoUNvP_MOxE5ROUKCC-hMWKDxllg8P-OT7BIS_4JV-viKDQY_D8m_Idg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=none
-// http://localhost:3000/?code=4%2F0AeaYSHCeQBuqosnuIpR-YnsjiuXAKV0SI1sxzI_wRYu7gK7hNirHvyk4BTu0AcH_duSloQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&authuser=0&prompt=none

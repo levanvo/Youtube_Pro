@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import "../css/Home+Herder.scss"
+import "../scss/Home+Herder.scss"
 import {
   AppstoreOutlined,
   ContainerOutlined,
   DesktopOutlined,
   MailOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   PieChartOutlined,
   RightOutlined,
   LeftOutlined
 } from '@ant-design/icons';
-import { Button, Menu } from 'antd';
+import { Menu } from 'antd';
 
 
 const HomePage = () => {

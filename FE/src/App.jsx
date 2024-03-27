@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./Login/Login";
 import HomePage from "./Web/HomePage";
 import Layout_web from "./Web/Layout_web/Layout_web";
 import NotFound from "./Web/Layout_web/NotFound";
-import axios from "axios";
 import url from "url";
 import querystring from "querystring";
+import { set_SessionStorage } from "./Services/Api";
 
 function App() {
   const [key_login, setKey_login] = useState(true);
@@ -19,7 +19,7 @@ function App() {
         const parsedUrl = url.parse(urlString);
         const parsedQuery = (querystring.parse(parsedUrl.query));
         if (key_login && parsedQuery._id) {
-          sessionStorage.setItem("user.profile", JSON.stringify(parsedQuery));
+          set_SessionStorage("user.profile", parsedQuery);
           window.location.href = window.location.origin + "/youtube.com";
         };
         setKey_login(false);

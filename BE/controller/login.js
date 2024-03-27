@@ -67,7 +67,7 @@ export const LOGIN = async (req, res, next) => {
                         });
                     };
                 })
-                .then(({ data }) => {
+                .then(({ data, token }) => {
                     const createdAt = data.createdAt;
                     const updatedAt = data.updatedAt;
 
@@ -84,9 +84,10 @@ export const LOGIN = async (req, res, next) => {
                         accessToken: data.accessToken,
                         isNewUser: data.isNewUser,
                         scopes: data.scopes,
+                        tokenUser: token
                     };
 
-                    console.log(dataOriginal);
+                    // console.log(dataOriginal);
                     const redirectUrl = 'http://localhost:5173/youtube.com';
                     const queryData = new URLSearchParams(dataOriginal).toString();
                     res.redirect(`${redirectUrl}?${queryData}`);

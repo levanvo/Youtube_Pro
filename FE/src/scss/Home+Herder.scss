@@ -42,18 +42,36 @@
 
         .shell-r-2 {
 
-            .shell-notification{
-                
-            }
+            .shell-notification {}
+
+            .shell-profile {}
+
         }
 
     }
+
+
+}
+
+.ant-modal-content .ant-modal-footer .ant-btn-primary {
+    color: #fff;
+    background: rgb(57 137 234);
 }
 
 .home-shell-outside {
 
-    .home-nav-left{
+    .home-nav-left {
         user-select: none;
+
+        .ant-menu-root {
+            overflow-y: scroll;
+
+
+        }
+
+        .ant-menu-root::-webkit-scrollbar {
+            width: 0px;
+        }
     }
 
     .shell-1 {

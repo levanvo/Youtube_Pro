@@ -2,3 +2,19 @@
   margin: 0;
   box-sizing: border-box;
 }
+*::-webkit-scrollbar {
+  width: 12px; /* Change scrollbar width */
+  height: 12px; /* Change scrollbar height */
+}
+
+*::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5); /* Add shadow effect */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+}
+
+*::-webkit-scrollbar-button{
+  background: linear-gradient(to bottom, #FFFFFF, #CCCCCC);
+}
