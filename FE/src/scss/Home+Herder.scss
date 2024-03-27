@@ -31,6 +31,10 @@
                 }
             }
         }
+
+        .shell-micro .css-1jzq0dw-MuiChip-label{
+            padding: 10px 8px;
+        }
     }
 
     .shell-right-herder {
@@ -50,13 +54,8 @@
 
     }
 
-
 }
 
-.ant-modal-content .ant-modal-footer .ant-btn-primary {
-    color: #fff;
-    background: rgb(57 137 234);
-}
 
 .home-shell-outside {
 
@@ -79,3 +78,18 @@
         top: 64px;
     }
 }
+
+// outside CSS
+.ant-modal-content .ant-modal-footer .ant-btn-primary {
+    color: #fff;
+    background: rgb(57 137 234);
+}
+
+:where(.css-dev-only-do-not-override-djtmh8).ant-drawer-right>.ant-drawer-content-wrapper {
+    right: -3.5%;
+}
+
+.ant-drawer .ant-drawer-content {
+    width: 85%;
+}
+

@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import "../../scss/Home+Herder.scss";
+import { Link } from 'react-router-dom';
 import { FaYoutube } from 'react-icons/fa';
-import { AudioOutlined, CustomerServiceOutlined, DeploymentUnitOutlined, RiseOutlined, StarOutlined, BellOutlined } from '@ant-design/icons';
+import {
+  AudioOutlined, CustomerServiceOutlined, DeploymentUnitOutlined,
+  RiseOutlined, StarOutlined, BellOutlined, UserOutlined,
+  LogoutOutlined
+} from '@ant-design/icons';
 import { Input, Space, Button, Tooltip, Avatar, Drawer, Modal } from 'antd';
 import { get_SessionStorage } from '../../Services/Api';
 const { Search } = Input;
-
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 const Header = () => {
   const [Profile, setProfile] = useState({});
@@ -57,9 +63,14 @@ const Header = () => {
 
   const dataHerderUser = () => {
     return <div className='h-[45px] flex space-x-2 float-right '>
-      <h2 className='leading-[46px]'>{Profile?.name}</h2>
+      <div className="">
+        <h2 className='leading-[46px] font-bold text-gray-600'>{Profile?.name}</h2>
+      </div>
       <img className='w-[45px] rounded-full' src={Profile?.picture} />
     </div>
+  };
+  const handleClick_MIC = () => {
+    console.info('You clicked the Chip.');
   };
 
   return (
@@ -67,23 +78,20 @@ const Header = () => {
 
       <div className="shell-left-herder flex space-x-20 xl:space-x-32">
         <div className="shell-youtube-icon ml-10 pt-5 flex">
-          <FaYoutube className='youtube-icon' />
-          <h2 className='ml-6 -mt-1 font-bold'>Youtube+</h2>
+          <Link to={window.location.origin + "/youtube.com"}><FaYoutube className='youtube-icon' /></Link>
+          <Link to={window.location.origin + "/youtube.com"}><h2 className='ml-6 -mt-1 font-bold'>Youtube+</h2></Link>
         </div>
 
         <div className="shell-search mt-4 flex space-x-5">
           <Space direction="vertical">
-            <Search
-              placeholder="input search text"
-              allowClear
-              onSearch={onSearch}
-              className='w-48 md:w-[300px] xl:w-[500px] '
-            />
+            <Search placeholder="input search text" allowClear
+              onSearch={onSearch} className='w-48 md:w-[300px] xl:w-[500px] ' />
           </Space>
 
-          <div className="">
-            <AudioOutlined style={{ fontSize: 16, color: "gray" }} className='p-[11px] -mt-[1px] rounded-full bg-gray-100 hover:bg-gray-200 duration-200 cursor-pointer' />
-          </div>
+          <Stack className='shell-micro m-[2px]' direction="row" spacing={1}>
+            <Chip className='bg-gray-100 hover:bg-gray-200 duration-200 cursor-pointer' label={<AudioOutlined style={{ fontSize: 16, color: "gray" }} />} variant="outlined" onClick={handleClick_MIC} >
+            </Chip>
+          </Stack>
 
         </div>
       </div>
@@ -111,18 +119,18 @@ const Header = () => {
             <Avatar onClick={showDrawer} style={{ verticalAlign: 'middle', cursor: "pointer" }} size="large"> {<img className='scale-125' src={Profile?.picture} />}  </Avatar>
             <Drawer title={dataHerderUser()} onClose={onClose} open={openHerderUser}>
 
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p className='hover:bg-red-500 bg-red-400 text-white text-center cursor-pointer p-2 rounded-md font-bold mt-[66vh]' onClick={() => showModal_logout()}>Log-out</p>
+              <div className="h-[92%]">
+                <Link to={``}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
+                <Link to={``}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
+                <Link to={``}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
+              </div>
+              <p className='hover:bg-red-500 bg-red-400 text-white text-center cursor-pointer p-2 rounded-md font-bold ' onClick={() => showModal_logout()}><span className='mr-1'>Log-out</span><LogoutOutlined className='mt-1' /></p>
 
             </Drawer>
           </div>
         </div>
       </div>
       <Modal title="Are you sure Sign-out ?" open={isModalOpen_logout} onOk={handleOk_logout} onCancel={handleCancel_logout}> </Modal>
-
     </div>
   )
 }
