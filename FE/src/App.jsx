@@ -10,6 +10,7 @@ import querystring from "querystring";
 import { get_SessionStorage, set_SessionStorage } from "./Services/Api";
 import Main_Profile from "./Profile/Main_Profile";
 import { LanguageProvider } from "./LanguageProvider";
+import Orther_Page from "./Profile/Orther_Page";
 
 function App() {
   const [key_login, setKey_login] = useState(true);
@@ -47,7 +48,7 @@ function App() {
           <Route path="user-board/:id" element={<Main_Profile />} />
           <Route path="admin-board/:id" element={<Main_Profile />} />
 
-
+          <Route path="area/orther" element={<Orther_Page />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

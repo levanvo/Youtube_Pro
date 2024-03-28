@@ -129,8 +129,8 @@ const Header = () => {
 
               <div className="h-[92%]">
                 <Link onClick={() => changeLanguage('area-profile')} to={Profile?.scopes?Profile.scopes?.includes("admin")?`admin-board/${Profile?._id}`:`user-board/${Profile?._id}`:(window.location.origin)}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
-                <Link onClick={() => changeLanguage('area-orther')} to={``}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><AreaChartOutlined /><span>Other</span></p></Link>
-                <Link to={``}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><SettingsOutlinedIcon /><span>Setting</span></p></Link>
+                <Link onClick={() => changeLanguage('area-orther')} to={`area/orther`}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><AreaChartOutlined /><span>Other</span></p></Link>
+                <button className='hover:bg-gray-400 rounded-full p-[7px] cursor-pointer flex space-x-2 justify-center hover:text-white w-full duration-[0.1s]'><SettingsOutlinedIcon /><span>Setting</span></button>
               </div>
               <p className='hover:bg-red-500 bg-red-400 text-white text-center cursor-pointer p-2 rounded-md font-bold ' onClick={() => showModal_logout()}><span className='mr-1'>Log-out</span><LogoutOutlined className='mt-1' /></p>
 
