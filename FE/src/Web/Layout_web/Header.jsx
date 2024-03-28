@@ -16,6 +16,7 @@ const { Search } = Input;
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import LanguageContext from '../../LanguageProvider';
+import 'animate.css';
 
 const Header = () => {
   const [Profile, setProfile] = useState({});
@@ -82,7 +83,7 @@ const Header = () => {
     <div className='w-[100%] flex flex-wap space-x-5 h-16 bg-gray-50 herder-shell-ouside'>
 
       <div className="shell-left-herder flex space-x-20 xl:space-x-32">
-        <div className="shell-youtube-icon ml-10 pt-5 flex" onClick={() => changeLanguage('area-web')}>
+        <div className="shell-youtube-icon ml-[45px] pt-6 flex" onClick={() => changeLanguage('area-web')}>
           <Link to={window.location.origin + "/youtube.com"}><FaYoutube className='youtube-icon' /></Link>
           <Link to={window.location.origin + "/youtube.com"}><h2 className='ml-6 -mt-1 font-bold'>Youtube+</h2></Link>
         </div>
@@ -117,19 +118,32 @@ const Header = () => {
           </Tooltip>
         </div>
         <div className="shell-r-2 mt-[20px] mr-6 flex space-x-5">
-          <div className="shell-notification ">
-            <VideoCallOutlinedIcon className='scale-125 mt-[2px] text-gray-500 cursor-pointer' />
-          </div>
-          <div className="shell-notification ">
-            <NotificationsOutlinedIcon className='scale-125 text-gray-500 cursor-pointer' />
+          {Profile?.scopes && !Profile.scopes?.includes("admin") &&
+            <div className="shell-notification ">
+              <Tooltip placement="topLeft" title={"Tải lên video của bạn"}>
+                <VideoCallOutlinedIcon className='scale-125 mt-[2px] text-gray-500 cursor-pointer ' />
+              </Tooltip>
+            </div>
+          }
+          <div className="shell-notification animate__animated animate__flash animate__infinite">
+            <NotificationsOutlinedIcon className=' text-gray-500 cursor-pointer ' />
           </div>
           <div className="shell-profile -mt-[7px] flex space-x-1">
             <Avatar onClick={showDrawer} style={{ verticalAlign: 'middle', cursor: "pointer" }} size="large"> {<img className='scale-125' src={Profile?.picture} />}  </Avatar>
             <Drawer title={dataHerderUser()} onClose={onClose} open={openHerderUser}>
 
               <div className="h-[92%]">
-                <Link onClick={() => changeLanguage('area-profile')} to={Profile?.scopes?Profile.scopes?.includes("admin")?`admin-board/${Profile?._id}`:`user-board/${Profile?._id}`:(window.location.origin)}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
-                <Link onClick={() => changeLanguage('area-orther')} to={`area/orther`}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><AreaChartOutlined /><span>Other</span></p></Link>
+                {
+                  Profile?.scopes ?
+                    Profile.scopes?.includes("admin") ?
+                      <Link onClick={() => changeLanguage(`area-profile-admin`)} to={`admin-board/${Profile?._id}`}><p onClick={() => setOpenHerder_User(false)} className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
+                      :
+                      <Link onClick={() => changeLanguage(`area-profile-user`)} to={`user-board/${Profile?._id}`}><p onClick={() => setOpenHerder_User(false)} className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
+                    :
+                    window.location.origin
+                }
+
+                <Link onClick={() => changeLanguage('area-orther')} to={`area/orther`}><p onClick={() => setOpenHerder_User(false)} className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><AreaChartOutlined /><span>Other</span></p></Link>
                 <button className='hover:bg-gray-400 rounded-full p-[7px] cursor-pointer flex space-x-2 justify-center hover:text-white w-full duration-[0.1s]'><SettingsOutlinedIcon /><span>Setting</span></button>
               </div>
               <p className='hover:bg-red-500 bg-red-400 text-white text-center cursor-pointer p-2 rounded-md font-bold ' onClick={() => showModal_logout()}><span className='mr-1'>Log-out</span><LogoutOutlined className='mt-1' /></p>

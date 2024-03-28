@@ -11,6 +11,7 @@ import { get_SessionStorage, set_SessionStorage } from "./Services/Api";
 import Main_Profile from "./Profile/Main_Profile";
 import { LanguageProvider } from "./LanguageProvider";
 import Orther_Page from "./Profile/Orther_Page";
+import Admin_Profile from "./Admin/Admin_Profile";
 
 function App() {
   const [key_login, setKey_login] = useState(true);
@@ -46,7 +47,7 @@ function App() {
         <Route path="/youtube.com" element={<Layout_web />}>
           <Route index element={<HomePage />} />
           <Route path="user-board/:id" element={<Main_Profile />} />
-          <Route path="admin-board/:id" element={<Main_Profile />} />
+          <Route path="admin-board/:id" element={<Admin_Profile />} />
 
           <Route path="area/orther" element={<Orther_Page />} />
         </Route>

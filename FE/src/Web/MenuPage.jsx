@@ -23,40 +23,50 @@ const MenuPage = () => {
         return { key, icon, children, label, type, };
     }
 
+    
     let items_WEB = [
         collapsed ?
             getItem('', '0', <div className='w-[40px]' onClick={() => toggleCollapsed()}><RightOutlined /></div>)
             :
             getItem('', '0', <div className=' w-[200px] flex justify-center h-[40px] ' onClick={() => toggleCollapsed()}><LeftOutlined /></div>),
-        getItem('Option 1', '1', <PieChartOutlined />),
-        getItem('Option 2', '2', <DesktopOutlined />),
-        getItem('Option 3', '3', <ContainerOutlined />),
-        getItem('Navigation One', 'sub1', <MailOutlined />, [
-            getItem('Option 5', '5'),
-            getItem('Option 6', '6'),
-            getItem('Option 7', '7'),
-            getItem('Option 8', '8'),
+        getItem('Trang chủ', '1', <PieChartOutlined />),
+        getItem('Tiktok shorts', '2', <DesktopOutlined />),
+        getItem('Danh sách', 'sub1', <MailOutlined />, [
+            getItem('Đã thích', '5'),
+            getItem('Xem sau', '6'),
         ]),
-        getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-            getItem('Option 9', '9'),
-            getItem('Option 10', '10'),
-            getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),
+        getItem('Kênh của bạn', 'sub2', <AppstoreOutlined />, [
+            getItem('null', '9'),
+            getItem('null', '10'),
+            // getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),
         ]),
+        getItem('Chính sách của chúng tôi', '10', <PieChartOutlined />),
     ];
-    let items_PROFILE = [
+    let items_PROFILE_USER = [
         collapsed ?
             getItem('', '0', <div className='w-[40px]' onClick={() => toggleCollapsed()}><RightOutlined /></div>)
             :
             getItem('', '0', <div className=' w-[200px] flex justify-center h-[40px] ' onClick={() => toggleCollapsed()}><LeftOutlined /></div>),
-        getItem('Option 1', '1', <PieChartOutlined />),
-        getItem('Option 2', '2', <DesktopOutlined />),
-        getItem('Option 3', '3', <ContainerOutlined />),
-        getItem('Navigation One', 'sub1', <MailOutlined />, [
-            getItem('Option 5', '5'),
-            getItem('Option 6', '6'),
-            getItem('Option 7', '7'),
-            getItem('Option 8', '8'),
+        getItem('Tổng quan', '1', <PieChartOutlined />),
+        getItem('Video', 'sub1', <MailOutlined onClick={()=>Switch_Video()}/>, [
+            getItem('Đã thích', '5'),
+            getItem('Xem sau', '6'),
         ]),
+        getItem('USER', '2', <PieChartOutlined />),
+        
+    ];
+    let items_PROFILE_ADMIN = [
+        collapsed ?
+            getItem('', '0', <div className='w-[40px]' onClick={() => toggleCollapsed()}><RightOutlined /></div>)
+            :
+            getItem('', '0', <div className=' w-[200px] flex justify-center h-[40px] ' onClick={() => toggleCollapsed()}><LeftOutlined /></div>),
+        getItem('Tổng quan', '1', <PieChartOutlined />),
+        getItem('Video', 'sub1', <MailOutlined onClick={()=>Switch_Video()}/>, [
+            getItem('Biên soạn', '5'),
+            getItem('Null', '6'),
+            getItem('Null', '7'),
+        ]),
+        getItem('ADMIN', '2', <PieChartOutlined />),
     ];
     let items_OTHER = [
         collapsed ?
@@ -80,13 +90,24 @@ const MenuPage = () => {
                 />
             </div>
         }
-        if (language == "area-profile") {
+        if (language == "area-profile-user") {
             return <div className='home-nav-left'>
                 <Menu
                     defaultSelectedKeys={['1']}
                     mode="inline"
                     inlineCollapsed={collapsed}
-                    items={items_PROFILE}
+                    items={items_PROFILE_USER}
+                    className='h-[91vh] shell-1'
+                />
+            </div>
+        }
+        if (language == "area-profile-admin") {
+            return <div className='home-nav-left'>
+                <Menu
+                    defaultSelectedKeys={['1']}
+                    mode="inline"
+                    inlineCollapsed={collapsed}
+                    items={items_PROFILE_ADMIN}
                     className='h-[91vh] shell-1'
                 />
             </div>
