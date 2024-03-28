@@ -8,6 +8,8 @@ import NotFound from "./Web/Layout_web/NotFound";
 import url from "url";
 import querystring from "querystring";
 import { get_SessionStorage, set_SessionStorage } from "./Services/Api";
+import Main_Profile from "./Profile/Main_Profile";
+import { LanguageProvider } from "./LanguageProvider";
 
 function App() {
   const [key_login, setKey_login] = useState(true);
@@ -18,7 +20,7 @@ function App() {
         const urlString = window.location.href;
         const parsedUrl = url.parse(urlString);
         let parsedQuery = (querystring.parse(parsedUrl.query));
-        if(parsedQuery.scopes){
+        if (parsedQuery.scopes) {
           parsedQuery.scopes = parsedQuery.scopes.split(",");
         };
 
@@ -34,16 +36,22 @@ function App() {
     fetchData();
   }, []);
 
-  
-  return (
-    <Routes>
-      <Route path="/" element={<Login />} />
 
-      <Route path="/youtube.com" element={<Layout_web />}>
-        <Route index element={<HomePage />} />
-      </Route>
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+  return (
+    <LanguageProvider>
+      <Routes>
+        <Route path="/" element={<Login />} />
+
+        <Route path="/youtube.com" element={<Layout_web />}>
+          <Route index element={<HomePage />} />
+          <Route path="user-board/:id" element={<Main_Profile />} />
+          <Route path="admin-board/:id" element={<Main_Profile />} />
+
+
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </LanguageProvider>
   );
 }
 

@@ -1,23 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import "../../scss/Home+Herder.scss";
 import { Link } from 'react-router-dom';
 import { FaYoutube } from 'react-icons/fa';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import VideoCallOutlinedIcon from '@mui/icons-material/VideoCallOutlined';
+import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import {
   AudioOutlined, CustomerServiceOutlined, DeploymentUnitOutlined,
   RiseOutlined, StarOutlined, BellOutlined, UserOutlined,
-  LogoutOutlined
+  LogoutOutlined, AreaChartOutlined
 } from '@ant-design/icons';
 import { Input, Space, Button, Tooltip, Avatar, Drawer, Modal } from 'antd';
 import { get_SessionStorage } from '../../Services/Api';
 const { Search } = Input;
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import LanguageContext from '../../LanguageProvider';
 
 const Header = () => {
   const [Profile, setProfile] = useState({});
   const [loadings, setLoadings] = useState([]);
   const [openHerderUser, setOpenHerder_User] = useState(false);
   const [isModalOpen_logout, setIsModalOpen_logout] = useState(false);
+  const { language, changeLanguage } = useContext(LanguageContext);
 
   const onSearch = (value, _e, info) => console.log(info?.source, value);
   const enterLoading = (index) => {
@@ -77,14 +82,14 @@ const Header = () => {
     <div className='w-[100%] flex flex-wap space-x-5 h-16 bg-gray-50 herder-shell-ouside'>
 
       <div className="shell-left-herder flex space-x-20 xl:space-x-32">
-        <div className="shell-youtube-icon ml-10 pt-5 flex">
+        <div className="shell-youtube-icon ml-10 pt-5 flex" onClick={() => changeLanguage('area-web')}>
           <Link to={window.location.origin + "/youtube.com"}><FaYoutube className='youtube-icon' /></Link>
           <Link to={window.location.origin + "/youtube.com"}><h2 className='ml-6 -mt-1 font-bold'>Youtube+</h2></Link>
         </div>
 
         <div className="shell-search mt-4 flex space-x-5">
           <Space direction="vertical">
-            <Search placeholder="input search text" allowClear
+            <Search placeholder="Tìm kiếm" allowClear
               onSearch={onSearch} className='w-48 md:w-[300px] xl:w-[500px] ' />
           </Space>
 
@@ -113,16 +118,19 @@ const Header = () => {
         </div>
         <div className="shell-r-2 mt-[20px] mr-6 flex space-x-5">
           <div className="shell-notification ">
-            <BellOutlined className='scale-150 text-gray-500 cursor-pointer' />
+            <VideoCallOutlinedIcon className='scale-125 mt-[2px] text-gray-500 cursor-pointer' />
+          </div>
+          <div className="shell-notification ">
+            <NotificationsOutlinedIcon className='scale-125 text-gray-500 cursor-pointer' />
           </div>
           <div className="shell-profile -mt-[7px] flex space-x-1">
             <Avatar onClick={showDrawer} style={{ verticalAlign: 'middle', cursor: "pointer" }} size="large"> {<img className='scale-125' src={Profile?.picture} />}  </Avatar>
             <Drawer title={dataHerderUser()} onClose={onClose} open={openHerderUser}>
 
               <div className="h-[92%]">
-                <Link to={``}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
-                <Link to={``}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
-                <Link to={``}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
+                <Link onClick={() => changeLanguage('area-profile')} to={Profile?.scopes?Profile.scopes?.includes("admin")?`admin-board/${Profile?._id}`:`user-board/${Profile?._id}`:(window.location.origin)}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
+                <Link onClick={() => changeLanguage('area-orther')} to={``}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><AreaChartOutlined /><span>Other</span></p></Link>
+                <Link to={``}><p className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><SettingsOutlinedIcon /><span>Setting</span></p></Link>
               </div>
               <p className='hover:bg-red-500 bg-red-400 text-white text-center cursor-pointer p-2 rounded-md font-bold ' onClick={() => showModal_logout()}><span className='mr-1'>Log-out</span><LogoutOutlined className='mt-1' /></p>
 
