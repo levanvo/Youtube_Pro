@@ -2,11 +2,13 @@ import React, { useState, useEffect, useContext } from 'react'
 import "../scss/Home+Herder.scss"
 import {
     AppstoreOutlined,
-    ContainerOutlined,
-    DesktopOutlined,
-    MailOutlined,
+    HomeOutlined,
+    TikTokOutlined,
+    PlaySquareOutlined,
     PieChartOutlined,
     RightOutlined,
+    HeartOutlined,
+    WalletOutlined,
     LeftOutlined
 } from '@ant-design/icons';
 import { Menu } from 'antd';
@@ -29,11 +31,11 @@ const MenuPage = () => {
             getItem('', '0', <div className='w-[40px]' onClick={() => toggleCollapsed()}><RightOutlined /></div>)
             :
             getItem('', '0', <div className=' w-[200px] flex justify-center h-[40px] ' onClick={() => toggleCollapsed()}><LeftOutlined /></div>),
-        getItem('Trang chủ', '1', <PieChartOutlined />),
-        getItem('Tiktok shorts', '2', <DesktopOutlined />),
-        getItem('Danh sách', 'sub1', <MailOutlined />, [
-            getItem('Đã thích', '5'),
-            getItem('Xem sau', '6'),
+        getItem('Trang chủ', '1', <HomeOutlined />),
+        getItem('Tiktok shorts', '2', <TikTokOutlined />),
+        getItem('Danh sách', 'sub1', <PlaySquareOutlined />, [
+            getItem('Đã thích', '5', <HeartOutlined />),
+            getItem('Xem sau', '6', <WalletOutlined />),
         ]),
         getItem('Kênh của bạn', 'sub2', <AppstoreOutlined />, [
             getItem('null', '9'),

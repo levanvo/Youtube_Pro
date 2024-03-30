@@ -14,6 +14,7 @@ import Layout_Admin from "./Admin/Layout_Admin";
 import Layout_User from "./Profile/Layout_User";
 import User_Dashboard from "./Profile/User_Dashboard";
 import Admin_Dashboard from "./Admin/Admin_Dashboard";
+import Video from "./Admin/Video/Video";
 
 function App() {
   const [key_login, setKey_login] = useState(true);
@@ -57,6 +58,8 @@ function App() {
 
         <Route path="admin-board/:id" element={<Layout_Admin />}>
           <Route index element={<Admin_Dashboard />} />
+          <Route path="video" element={<Video />} />
+          <Route path="crawl_video" element={<Admin_Dashboard />} />
         </Route>
 
         <Route path="area/orther" element={<Orther_Page />} />

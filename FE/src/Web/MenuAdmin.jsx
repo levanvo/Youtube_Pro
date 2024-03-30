@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react'
 import "../scss/Home+Herder.scss"
 import {
-    AppstoreOutlined,
-    ContainerOutlined,
-    DesktopOutlined,
-    MailOutlined,
+    YoutubeOutlined,
+    WindowsOutlined,
+    CustomerServiceOutlined,
     PieChartOutlined,
     RightOutlined,
-    LeftOutlined
+    TikTokOutlined,
+    LeftOutlined,
+    PlaySquareOutlined,
+    TableOutlined
 } from '@ant-design/icons';
 import { Menu } from 'antd';
+import { Link } from "react-router-dom";
 import LanguageContext from '../LanguageProvider';
 
 
@@ -20,7 +23,13 @@ const MenuAdmin = () => {
         setCollapsed(!collapsed);
     };
     function getItem(label, key, icon, children, type) {
-        return { key, icon, children, label, type, };
+        return {
+            key,
+            icon,
+            children,
+            type,
+            label,
+        };
     }
 
 
@@ -29,29 +38,26 @@ const MenuAdmin = () => {
             getItem('', '0', <div className='w-[40px]' onClick={() => toggleCollapsed()}><RightOutlined /></div>)
             :
             getItem('', '0', <div className=' w-[200px] flex justify-center h-[40px] ' onClick={() => toggleCollapsed()}><LeftOutlined /></div>),
-        getItem('Trang chủ', '1', <PieChartOutlined />),
-        getItem('Danh sách', 'sub1', <MailOutlined />, [
-            getItem('Đã thích', '5'),
-            getItem('Xem sau', '6'),
-        ]),
-        getItem('Kênh của bạn', 'sub2', <AppstoreOutlined />, [
-            getItem('null', '9'),
-            getItem('null', '10'),
-        ]),
+        getItem(<Link to="">Tổng quan</Link>, '1', <WindowsOutlined />),
+        getItem(<Link to="video">Video</Link>, '2', <YoutubeOutlined />),
+        getItem(<Link to="video">Titok-shorts</Link>, '3', <TikTokOutlined />),
+        getItem(<Link to="video">Radio</Link>, '4', <CustomerServiceOutlined />),
+        getItem(<Link to="video">Kênh</Link>, '5', <PlaySquareOutlined />),
+        getItem(<Link to="video">Khác</Link>, '5', <TableOutlined />),
         getItem('ADMIN', 'admin-100', <PieChartOutlined />),
     ];
 
     const render_Menu_ADMIN = () => {
-            return <div className='home-nav-left'>
-                <Menu
-                    defaultSelectedKeys={['1']}
-                    mode="inline"
-                    inlineCollapsed={collapsed}
-                    items={items_ADMIN}
-                    className='h-[91vh] shell-1'
-                />
-            </div>
-        
+        return <div className='home-nav-left'>
+            <Menu
+                defaultSelectedKeys={['1']}
+                mode="inline"
+                inlineCollapsed={collapsed}
+                items={items_ADMIN}
+                className='h-[91vh] shell-1'
+            />
+        </div>
+
 
     }
 

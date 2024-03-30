@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from 'react'
 import "../scss/Home+Herder.scss"
 import {
     AppstoreOutlined,
-    ContainerOutlined,
-    DesktopOutlined,
-    MailOutlined,
     PieChartOutlined,
     RightOutlined,
+    PlaySquareOutlined,
+    IdcardOutlined,
     LeftOutlined
 } from '@ant-design/icons';
 import { Menu } from 'antd';
@@ -30,8 +29,8 @@ const MenuUser = () => {
             getItem('', '0', <div className='w-[40px]' onClick={() => toggleCollapsed()}><RightOutlined /></div>)
             :
             getItem('', '0', <div className=' w-[200px] flex justify-center h-[40px] ' onClick={() => toggleCollapsed()}><LeftOutlined /></div>),
-        getItem('Trang chủ', '1', <PieChartOutlined />),
-        getItem('Danh sách', 'sub1', <MailOutlined />, [
+        getItem('Tổng quan', '1',<IdcardOutlined />),
+        getItem('Danh sách', 'sub1', <PlaySquareOutlined />, [
             getItem('Đã thích', '5'),
             getItem('Xem sau', '6'),
         ]),
@@ -42,7 +41,6 @@ const MenuUser = () => {
         getItem('USER', 'user-100', <PieChartOutlined />),
     ];
 
-    console.log("hgfcvgh", language);
     const render_Menu_USER = () => {
         return <div className='home-nav-left'>
             <Menu
