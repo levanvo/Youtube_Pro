@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import "../scss/Home+Herder.scss";
-import MenuPage from './MenuPage';
 import {
   UpCircleOutlined,
 } from "@ant-design/icons";

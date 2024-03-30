@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import "../../scss/Home+Herder.scss";
 import { Link } from 'react-router-dom';
 import { FaYoutube } from 'react-icons/fa';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';

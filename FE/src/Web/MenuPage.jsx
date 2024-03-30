@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import "../scss/Home+Herder.scss"
 import {
     AppstoreOutlined,
     HomeOutlined,
