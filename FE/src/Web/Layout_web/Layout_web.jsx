@@ -10,7 +10,7 @@ const Layout_web = () => {
             <Header />
             <div className="flex home-shell-outside">
                 <MenuPage />
-                <div className="w-[100%] h-auto bg-gray-500 p-2 rounded-md m-1">
+                <div className="home-nav-right shell-2 w-[100%] h-[90vh] bg-gray-500  rounded-md m-1">
                     <Outlet />
                 </div>
             </div>

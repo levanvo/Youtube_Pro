@@ -73,6 +73,14 @@
         }
     }
 
+    .home-nav-right{
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar{
+            width: 0px;
+        }
+    }
+
     .shell-1 {
         position: sticky;
         top: 64px;

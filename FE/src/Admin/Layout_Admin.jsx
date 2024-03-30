@@ -18,7 +18,7 @@ const Layout_Admin = () => {
 
             <div className="flex home-shell-outside">
                 <MenuAdmin/>
-                <div className="home-nav-right w-[100%] h-auto bg-gray-500 shell-2 p-2 rounded-md m-1">
+                <div className="home-nav-right w-[100%] h-[90vh] bg-gray-500 shell-2 p-2 rounded-md m-1">
                     <Outlet />
                 </div>
             </div>

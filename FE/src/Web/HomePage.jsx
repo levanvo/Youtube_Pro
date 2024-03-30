@@ -6,7 +6,7 @@ import MenuPage from './MenuPage'
 const HomePage = () => {
 
   return (
-    <div >
+    <div className=''>
       <h1>to make or get something or someone ready for something that will happen in the future:</h1>
       <br />
       <h1>to make or get something or someone ready for something that will happen in the future:</h1>
