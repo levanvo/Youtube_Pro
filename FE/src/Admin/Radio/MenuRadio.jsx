@@ -7,7 +7,7 @@ import { Menu } from 'antd';
 import { Link } from "react-router-dom";
 import LanguageContext from '../../LanguageProvider';
 
-const MenuVideo = () => {
+const MenuRadio = () => {
 
     function getItem(label, key, icon, children, type) {
         return {
@@ -27,11 +27,11 @@ const MenuVideo = () => {
                 getItem(<Link to="video">Biên soạn</Link>, '1', <MailOutlined />),
                 getItem(<Link to="video2">Crawl thêm dữ liệu</Link>, '2', <MailOutlined />),
                 getItem(<Link to="video">Biên soạn3</Link>, '3', <MailOutlined />),
-                getItem(<Link to="video2">Video</Link>, '4', <MailOutlined />),
+                getItem(<Link to="video2">Radio</Link>, '4', <MailOutlined />),
             ]}
             className='h-[87.7vh] shell-1 w-44 rounded-md'
         />
     )
 }
 
-export default MenuVideo
+export default MenuRadio

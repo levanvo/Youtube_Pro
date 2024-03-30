@@ -1,17 +1,17 @@
 import React from 'react'
-import MenuVideo from './MenuVideo'
+import MenuOrther from './MenuOrther'
 
-const Video = () => {
+const Orther = () => {
   return (
     <div className="flex home-shell-outside">
-      <MenuVideo />
+      <MenuOrther />
       <div className=" w-[100%] bg-gray-100 h-[87.7vh] ml-2 shell-2 rounded-md">
-        <div className="conten_Video p-2">
-          Video
+        <div className="conten_Orther p-2">
+          Orther
         </div>
       </div>
     </div>
   )
 }
 
-export default Video
+export default Orther

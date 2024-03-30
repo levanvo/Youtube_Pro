@@ -1,17 +1,17 @@
 import React from 'react'
-import MenuVideo from './MenuVideo'
+import Menu_TiktokShorts from './Menu_TiktokShorts'
 
-const Video = () => {
+const TiktokShorts = () => {
   return (
     <div className="flex home-shell-outside">
-      <MenuVideo />
+      <Menu_TiktokShorts />
       <div className=" w-[100%] bg-gray-100 h-[87.7vh] ml-2 shell-2 rounded-md">
-        <div className="conten_Video p-2">
-          Video
+        <div className="conten_TiktokShorts p-2">
+          TiktokShorts
         </div>
       </div>
     </div>
   )
 }
 
-export default Video
+export default TiktokShorts

@@ -40,10 +40,10 @@ const MenuAdmin = () => {
             getItem('', '0', <div className=' w-[200px] flex justify-center h-[40px] ' onClick={() => toggleCollapsed()}><LeftOutlined /></div>),
         getItem(<Link to="">Tổng quan</Link>, '1', <WindowsOutlined />),
         getItem(<Link to="video">Video</Link>, '2', <YoutubeOutlined />),
-        getItem(<Link to="video">Titok-shorts</Link>, '3', <TikTokOutlined />),
-        getItem(<Link to="video">Radio</Link>, '4', <CustomerServiceOutlined />),
-        getItem(<Link to="video">Kênh</Link>, '5', <PlaySquareOutlined />),
-        getItem(<Link to="video">Khác</Link>, '5', <TableOutlined />),
+        getItem(<Link to="tiktok-shorts">Titok-shorts</Link>, '3', <TikTokOutlined />),
+        getItem(<Link to="radio">Radio</Link>, '4', <CustomerServiceOutlined />),
+        getItem(<Link to="chanels">Kênh</Link>, '5', <PlaySquareOutlined />),
+        getItem(<Link to="orther">Khác</Link>, '6', <TableOutlined />),
         getItem('ADMIN', 'admin-100', <PieChartOutlined />),
     ];
 

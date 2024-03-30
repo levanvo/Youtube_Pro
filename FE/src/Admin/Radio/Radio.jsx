@@ -1,17 +1,17 @@
 import React from 'react'
-import MenuVideo from './MenuVideo'
+import MenuRadio from './MenuRadio'
 
-const Video = () => {
+const Radio = () => {
   return (
     <div className="flex home-shell-outside">
-      <MenuVideo />
+      <MenuRadio />
       <div className=" w-[100%] bg-gray-100 h-[87.7vh] ml-2 shell-2 rounded-md">
-        <div className="conten_Video p-2">
-          Video
+        <div className="conten_Radio p-2">
+          Radio
         </div>
       </div>
     </div>
   )
 }
 
-export default Video
+export default Radio

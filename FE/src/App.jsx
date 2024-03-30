@@ -15,6 +15,10 @@ import Layout_User from "./Profile/Layout_User";
 import User_Dashboard from "./Profile/User_Dashboard";
 import Admin_Dashboard from "./Admin/Admin_Dashboard";
 import Video from "./Admin/Video/Video";
+import TiktokShorts from "./Admin/Titok_shorts/Tiktok_shorts";
+import Radio from "./Admin/Radio/Radio";
+import Chanels from "./Admin/Chanels/Chanels";
+import Orther from "./Admin/Orther/Orther";
 
 function App() {
   const [key_login, setKey_login] = useState(true);
@@ -58,8 +62,26 @@ function App() {
 
         <Route path="admin-board/:id" element={<Layout_Admin />}>
           <Route index element={<Admin_Dashboard />} />
-          <Route path="video" element={<Video />} />
-          <Route path="crawl_video" element={<Admin_Dashboard />} />
+
+          <Route path="video" element={<Video />} >
+
+          </Route>
+
+          <Route path="tiktok-shorts" element={<TiktokShorts />} >
+
+          </Route>
+
+          <Route path="radio" element={<Radio />} >
+
+          </Route>
+
+          <Route path="chanels" element={<Chanels />} >
+
+          </Route>
+
+          <Route path="orther" element={<Orther />} >
+
+          </Route>
         </Route>
 
         <Route path="area/orther" element={<Orther_Page />} />
