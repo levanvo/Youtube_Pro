@@ -111,6 +111,7 @@ const HomePage = () => {
         <br />
       </div>
       {scrollTop && <p onClick={() => scrollToTop()}><UpCircleOutlined className='text-white cursor-pointer fixed top-[92vh] right-[3vw]' style={{ scale: "2.5" }} /></p>}
+      
     </div>
 
   )
