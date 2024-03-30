@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./Login/Login";
 import HomePage from "./Web/HomePage";
 import Layout_web from "./Web/Layout_web/Layout_web";
 import NotFound from "./Web/Layout_web/NotFound";
 import url from "url";
 import querystring from "querystring";
-import { get_SessionStorage, set_SessionStorage } from "./Services/Api";
-import Main_Profile from "./Profile/Main_Profile";
+import { set_SessionStorage } from "./Services/Api";
 import { LanguageProvider } from "./LanguageProvider";
 import Orther_Page from "./Profile/Orther_Page";
-import Admin_Profile from "./Admin/Admin_Profile";
+import Layout_Admin from "./Admin/Layout_Admin";
+import Layout_User from "./Profile/Layout_User";
+import User_Dashboard from "./Profile/User_Dashboard";
+import Admin_Dashboard from "./Admin/Admin_Dashboard";
 
 function App() {
   const [key_login, setKey_login] = useState(true);
@@ -46,11 +48,18 @@ function App() {
 
         <Route path="/youtube.com" element={<Layout_web />}>
           <Route index element={<HomePage />} />
-          <Route path="user-board/:id" element={<Main_Profile />} />
-          <Route path="admin-board/:id" element={<Admin_Profile />} />
 
-          <Route path="area/orther" element={<Orther_Page />} />
         </Route>
+
+        <Route path="user-board/:id" element={<Layout_User />} >
+          <Route index element={<User_Dashboard />} />
+        </Route>
+
+        <Route path="admin-board/:id" element={<Layout_Admin />}>
+          <Route index element={<Admin_Dashboard />} />
+        </Route>
+
+        <Route path="area/orther" element={<Orther_Page />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </LanguageProvider>

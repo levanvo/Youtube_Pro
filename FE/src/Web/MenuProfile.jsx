@@ -13,7 +13,7 @@ import { Menu } from 'antd';
 import LanguageContext from '../LanguageProvider';
 
 
-const MenuPage = () => {
+const MenuProfile = () => {
     const [collapsed, setCollapsed] = useState(false);
     const { language, changeLanguage } = useContext(LanguageContext);
     const toggleCollapsed = () => {
@@ -58,4 +58,4 @@ const MenuPage = () => {
     return render_Menu();
 }
 
-export default MenuPage
+export default MenuProfile

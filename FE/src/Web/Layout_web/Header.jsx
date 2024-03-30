@@ -136,14 +136,14 @@ const Header = () => {
                 {
                   Profile?.scopes ?
                     Profile.scopes?.includes("admin") ?
-                      <Link onClick={() => changeLanguage(`area-profile-admin`)} to={`admin-board/${Profile?._id}`}><p onClick={() => setOpenHerder_User(false)} className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
+                      <Link to={`/admin-board/${Profile?._id}`}><p onClick={() => setOpenHerder_User(false)} className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
                       :
-                      <Link onClick={() => changeLanguage(`area-profile-user`)} to={`user-board/${Profile?._id}`}><p onClick={() => setOpenHerder_User(false)} className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
+                      <Link to={`/user-board/${Profile?._id}`}><p onClick={() => setOpenHerder_User(false)} className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><UserOutlined /><span>Your profile</span></p></Link>
                     :
                     window.location.origin
                 }
 
-                <Link onClick={() => changeLanguage('area-orther')} to={`area/orther`}><p onClick={() => setOpenHerder_User(false)} className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><AreaChartOutlined /><span>Other</span></p></Link>
+                <Link to={`area/orther`}><p onClick={() => setOpenHerder_User(false)} className='hover:bg-gray-400 rounded-full p-2 flex space-x-2 justify-center hover:text-white duration-[0.1s]'><AreaChartOutlined /><span>Other</span></p></Link>
                 <button className='hover:bg-gray-400 rounded-full p-[7px] cursor-pointer flex space-x-2 justify-center hover:text-white w-full duration-[0.1s]'><SettingsOutlinedIcon /><span>Setting</span></button>
               </div>
               <p className='hover:bg-red-500 bg-red-400 text-white text-center cursor-pointer p-2 rounded-md font-bold ' onClick={() => showModal_logout()}><span className='mr-1'>Log-out</span><LogoutOutlined className='mt-1' /></p>
