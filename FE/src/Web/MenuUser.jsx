@@ -13,7 +13,7 @@ import { Menu } from 'antd';
 import LanguageContext from '../LanguageProvider';
 
 
-const MenuPage = () => {
+const MenuUser = () => {
     const [collapsed, setCollapsed] = useState(false);
     const { language, changeLanguage } = useContext(LanguageContext);
     const toggleCollapsed = () => {
@@ -24,13 +24,13 @@ const MenuPage = () => {
     }
 
 
-    let items_WEB = [
+
+    let items_USER = [
         collapsed ?
             getItem('', '0', <div className='w-[40px]' onClick={() => toggleCollapsed()}><RightOutlined /></div>)
             :
             getItem('', '0', <div className=' w-[200px] flex justify-center h-[40px] ' onClick={() => toggleCollapsed()}><LeftOutlined /></div>),
         getItem('Trang chủ', '1', <PieChartOutlined />),
-        getItem('Tiktok shorts', '2', <DesktopOutlined />),
         getItem('Danh sách', 'sub1', <MailOutlined />, [
             getItem('Đã thích', '5'),
             getItem('Xem sau', '6'),
@@ -38,24 +38,24 @@ const MenuPage = () => {
         getItem('Kênh của bạn', 'sub2', <AppstoreOutlined />, [
             getItem('null', '9'),
             getItem('null', '10'),
-            // getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),
         ]),
-        getItem('Chính sách của chúng tôi', '100', <PieChartOutlined />),
+        getItem('USER', 'user-100', <PieChartOutlined />),
     ];
 
-    const render_Menu = () => {
+    console.log("hgfcvgh", language);
+    const render_Menu_USER = () => {
         return <div className='home-nav-left'>
             <Menu
                 defaultSelectedKeys={['1']}
                 mode="inline"
                 inlineCollapsed={collapsed}
-                items={items_WEB}
+                items={items_USER}
                 className='h-[91vh] shell-1'
             />
         </div>
     }
 
-    return render_Menu();
+    return render_Menu_USER();
 }
 
-export default MenuPage
+export default MenuUser

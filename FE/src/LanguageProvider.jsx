@@ -3,7 +3,10 @@ import React, { createContext, useState } from 'react';
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('area-web');
+  const getURL = window.location.href;
+  let getArea =  getURL.includes("admin-board")?"area_admin":"area_user";
+
+  const [language, setLanguage] = useState(getArea);
 
   const changeLanguage = (newLanguage) => {
     setLanguage(newLanguage);
