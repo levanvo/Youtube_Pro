@@ -53,12 +53,10 @@ function App() {
 
         <Route path="user-board/:id" element={<Layout_User />} >
           <Route index element={<User_Dashboard />} />
-          
         </Route>
 
         <Route path="admin-board/:id" element={<Layout_Admin />}>
           <Route index element={<Admin_Dashboard />} />
-
         </Route>
 
         <Route path="area/orther" element={<Orther_Page />} />
