@@ -1,14 +1,14 @@
 import { produce } from "immer";
 
 const Initial = {
-    dataPr: [],
+    dataUser: [],
 };
 
-const User_Info = (state = Initial, action) => {
+const Users = (state = Initial, action) => {
     return produce(state, draft => {
         switch (action.type) {
-            case "fetchAPI":
-                draft.dataPr = action.payload;
+            case "fetch-User":
+                draft.dataUser = action.payload;
                 return;
             default:
                 return state;
@@ -16,7 +16,7 @@ const User_Info = (state = Initial, action) => {
     });
 };
 
-export default User_Info
+export default Users
 /*
 switch (action.type) {
             // ===================get data

@@ -21,6 +21,10 @@ const Model_User = new mongose.Schema(
             type:String,
             require:true
         },
+        phone:{
+            type:String,
+            default:""
+        },
         locale:{
             type:String,
             default:"vi"

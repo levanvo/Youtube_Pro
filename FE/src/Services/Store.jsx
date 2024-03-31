@@ -1,8 +1,8 @@
 import { legacy_createStore as createStore, combineReducers } from "redux";
-import User_Info from "./User";
+import Users from "./Users/User";
 
 const root = combineReducers({
-    getUser: User_Info,
+    Info_users: Users,
 });
 
 const store = createStore(root);

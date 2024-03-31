@@ -5,7 +5,8 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from './Services/Store.jsx';
-import "./scss/Home+Herder.scss"
+import "./scss/Home+Herder.scss";
+import "./scss/Users.scss";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>

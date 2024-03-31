@@ -3,27 +3,36 @@ import jwt from 'jsonwebtoken';
 
 export const allUser = async (req, res) => {
     try {
-        // const token = req.headers.authorization;
+        const token = req.headers.key_owner;
 
-        // if (!token) {
-        //     return res.status(403).json({
-        //         message: "Missing authorization token"
-        //     });
-        // }
+        if (!token) {
+            return res.status(403).json({
+                message: "Missing authorization token"
+            });
+        }
 
-        // jwt.verify(token, 'levanvo2k', async (err, decoded) => {
-        //     if (err) {
-        //         return res.status(403).json({
-        //             message: "Invalid or expired token"
-        //         });
-        //     } else {
-        const dataUser = await Model_User.find();
-        return res.status(200).json({
-            message: "All Users",
-            dataUser
+        jwt.verify(token, 'levanvo2k', async (err, decoded) => {
+            if (err) {
+                return res.status(403).json({
+                    message: "Invalid or expired token."
+                });
+            } else {
+                const verifiy = await Model_User.findById(decoded._id);
+                const { scopes } = verifiy;
+                
+                if (scopes.includes("admin")) {
+                    const dataUser = await Model_User.find();
+                    return res.status(200).json({
+                        message: "All Users",
+                        dataUser
+                    });
+                }else{
+                    return res.status(500).json({
+                        message: "You do not have permissions !!"
+                    });
+                };
+            };
         });
-        //     }
-        // });
     } catch (error) {
         console.error(error);
         return res.status(500).json({
@@ -43,19 +52,19 @@ export const oneUser = async (req, res) => {
         //     });
         // }
         // jwt.verify(token, 'levanvo2k', async (err, decoded) => {
-            // if (err) {
-            //     return res.status(403).json({
-            //         message: "Invalid or expired token"
-            //     });
-            // } else {
-                const _idUser = req.params.id;
-                const dataUser = await Model_User.findById(_idUser);
-                console.log("_idUser: ",_idUser);
-                console.log("dataUser: ",dataUser);
-                return res.status(200).json({
-                    message: "getOne User.",
-                    dataUser
-                });
+        // if (err) {
+        //     return res.status(403).json({
+        //         message: "Invalid or expired token"
+        //     });
+        // } else {
+        const _idUser = req.params.id;
+        const dataUser = await Model_User.findById(_idUser);
+        console.log("_idUser: ", _idUser);
+        console.log("dataUser: ", dataUser);
+        return res.status(200).json({
+            message: "getOne User.",
+            dataUser
+        });
         //     }
         // })
     } catch {
@@ -67,7 +76,7 @@ export const oneUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-         // const token = req.headers.authorization;
+        // const token = req.headers.authorization;
 
         // if (!token) {
         //     return res.status(403).json({
@@ -78,7 +87,7 @@ export const updateUser = async (req, res) => {
         const _idUser = req.params.id;
         const dataBodyUser = req.body;
 
-        const dataUser = await Model_User.findByIdAndUpdate( _idUser, dataBodyUser, { new: true });
+        const dataUser = await Model_User.findByIdAndUpdate(_idUser, dataBodyUser, { new: true });
 
         return Promise.resolve({
             message: "getOne User.",
@@ -93,7 +102,7 @@ export const updateUser = async (req, res) => {
 
 export const removeUser = async (req, res) => {
     try {
-         // const token = req.headers.authorization;
+        // const token = req.headers.authorization;
 
         // if (!token) {
         //     return res.status(403).json({

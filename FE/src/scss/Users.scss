@@ -1,0 +1,10 @@
+.shell-users-manage{
+
+    .shell_list_user{
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar{
+            width: 5px;
+        }
+    }
+}
