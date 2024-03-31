@@ -8,7 +8,8 @@ import {
     TikTokOutlined,
     LeftOutlined,
     PlaySquareOutlined,
-    TableOutlined
+    TableOutlined,
+    UserOutlined
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from "react-router-dom";
@@ -42,7 +43,8 @@ const MenuAdmin = () => {
         getItem(<Link to="tiktok-shorts">Titok-shorts</Link>, '3', <TikTokOutlined />),
         getItem(<Link to="radio">Radio</Link>, '4', <CustomerServiceOutlined />),
         getItem(<Link to="chanels">Kênh</Link>, '5', <PlaySquareOutlined />),
-        getItem(<Link to="orther">Khác</Link>, '6', <TableOutlined />),
+        getItem(<Link to="users">Người dùng</Link>, '6', <UserOutlined />),
+        getItem(<Link to="orther">Khác</Link>, '7', <TableOutlined />),
         getItem('ADMIN', 'admin-100', <PieChartOutlined />),
     ];
 

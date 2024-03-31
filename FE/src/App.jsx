@@ -19,6 +19,7 @@ import TiktokShorts from "./Admin/Titok_shorts/Tiktok_shorts";
 import Radio from "./Admin/Radio/Radio";
 import Chanels from "./Admin/Chanels/Chanels";
 import Orther from "./Admin/Orther/Orther";
+import Users from "./Admin/Users/Users";
 
 function App() {
   const [key_login, setKey_login] = useState(true);
@@ -76,6 +77,10 @@ function App() {
           </Route>
 
           <Route path="chanels" element={<Chanels />} >
+
+          </Route>
+
+          <Route path="users" element={<Users />} >
 
           </Route>
 

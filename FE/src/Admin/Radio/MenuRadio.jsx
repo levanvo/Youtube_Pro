@@ -23,7 +23,7 @@ const MenuRadio = () => {
             defaultSelectedKeys={['1']}
             mode="inline"
             items={[
-                getItem(<Link to="video">Biên soạn</Link>, '1', <MailOutlined />),
+                getItem(<Link to="">Biên soạn</Link>, '1', <MailOutlined />),
                 getItem(<Link to="video2">Crawl thêm dữ liệu</Link>, '2', <MailOutlined />),
                 getItem(<Link to="video">Biên soạn3</Link>, '3', <MailOutlined />),
                 getItem(<Link to="video2">Radio</Link>, '4', <MailOutlined />),

@@ -6,7 +6,7 @@ import { Menu } from 'antd';
 import { Link } from "react-router-dom";
 import LanguageContext from '../../LanguageProvider';
 
-const MenuChanels = () => {
+const Menu_Users = () => {
 
     function getItem(label, key, icon, children, type) {
         return {
@@ -23,14 +23,14 @@ const MenuChanels = () => {
             defaultSelectedKeys={['1']}
             mode="inline"
             items={[
-                getItem(<Link to="">Biên soạn</Link>, '1', <MailOutlined />),
+                getItem(<Link to="">Người dùng</Link>, '1', <MailOutlined />),
                 getItem(<Link to="video2">Crawl thêm dữ liệu</Link>, '2', <MailOutlined />),
                 getItem(<Link to="video">Biên soạn3</Link>, '3', <MailOutlined />),
-                getItem(<Link to="video2">Chanels</Link>, '4', <MailOutlined />),
+                getItem(<Link to="video2">Tiktok-shorts</Link>, '4', <MailOutlined />),
             ]}
             className='h-[87.7vh] shell-1 w-44 rounded-md'
         />
     )
 }
 
-export default MenuChanels
+export default Menu_Users
