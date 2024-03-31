@@ -13,6 +13,10 @@ const Model_User = new mongose.Schema(
             type:String,
             require:true
         },
+        personal_cover_photo:{
+            type:String,
+            default:"https://picsum.photos/200/300"
+        },
         email:{
             type:String,
             require:true
@@ -31,6 +35,22 @@ const Model_User = new mongose.Schema(
         scopes:{
             type:Array,
             default:["user","trial"]
+        },
+        like_videos:{
+            type:Array,
+            default:[]
+        },
+        watch_video_latter:{
+            type:Array,
+            default:[]
+        },
+        follow_chanels_ID:{
+            type:Array,
+            default:[]
+        },
+        isActive:{
+            type:Boolean,
+            default:true
         }
     },{timestamps:true,versionKey:false}
 )
