@@ -13,7 +13,7 @@ const Users = () => {
         const fetch = async () => {
             const { data } = await instance.get("/all-User", {
                 headers: {
-                    Key_owner: tokenUser,
+                    Authorization: tokenUser,
                 },
             });
             dispatch({ type: "fetch-User", payload: data })

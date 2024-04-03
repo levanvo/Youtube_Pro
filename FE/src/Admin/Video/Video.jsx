@@ -1,18 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import MenuVideo from './MenuVideo';
 import { Input, Drawer, Button, Space, Form, Select } from 'antd';
+import { useDispatch, useSelector } from "react-redux";
+import { get_SessionStorage, instance } from '../../Services/Api';
 
 const { Search } = Input;
 const { TextArea } = Input;
 
 const Video = () => {
   const [open_Add_Video, setOpen_Add_Video] = useState(false);
-  const [link_Video, setLink_Video]=useState("");
+  const [signalCreated_Video, setSignalCreate_video]=useState(true);
+  const [link_Video, setLink_Video] = useState("");
+  const dispatch = useDispatch();
+  const { dataChanels } = useSelector((items) => items.Info_chanels);
+  const { tokenUser } = get_SessionStorage("user.profile");
 
   const onSearch_Video = (value, _e, info) => {
     console.log(info?.source, value)
   };
 
+  // useEffect(() => {
+  //   const fetchApi_Chanels = async () => {
+  //     const { data } =await instance.get("/all-Chanel", {
+  //       headers: {
+  //         Authorization: tokenUser,
+  //       },
+  //     });
+  //     dispatch({ type: "fetch-Chanels", payload: data.dataChanels });
+  //     if(!data.dataChanels.length){
+  //       setSignalCreate_video(false)
+  //     };
+  //   };
+  //   fetchApi_Chanels();
+  // }, []);
+  
   // add-Video
 
   const showLargeDrawer = () => {
@@ -30,9 +51,10 @@ const Video = () => {
     if (!values.chanel_video) {
       values.chanel_video = "levanvo";
     };
-    if(values.link_video.includes("watch?v=")){
-      values.link_video=values.link_video.replace("watch?v=","embed/");
+    if (values.link_video.includes("watch?v=")) {
+      values.link_video = values.link_video.replace("watch?v=", "embed/");
     };
+
 
     console.log('Success:', values);
   };
@@ -40,10 +62,10 @@ const Video = () => {
     console.log('Failed:', errorInfo);
   };
 
-  const Preview_video = (event) =>{
+  const Preview_video = (event) => {
     let linkVideo = event.target.value;
-    if(linkVideo.includes("watch?v=")){
-      linkVideo=linkVideo.replace("watch?v=","embed/");
+    if (linkVideo.includes("watch?v=")) {
+      linkVideo = linkVideo.replace("watch?v=", "embed/");
     };
     // https://www.youtube.com/embed/8TyxiwMK3Rk
     // https://www.youtube.com/watch?v=8TyxiwMK3Rk
@@ -116,7 +138,7 @@ const Video = () => {
                       maxWidth: 600,
                     }} initialValues={{
                       remember: true,
-                    }}onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off"
+                    }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off"
                     >
                       <Form.Item>
                         <div className="flex justify-between w-[37vw] ">
@@ -126,7 +148,7 @@ const Video = () => {
                       </Form.Item>
 
                       <Form.Item
-                      className='-mt-3'
+                        className='-mt-3'
                         label="Tiêu đề"
                         name="title_video"
                         rules={[
@@ -199,7 +221,7 @@ const Video = () => {
                         <Form.Item
                           label="Kênh"
                           name="chanel_video"
-                          // defaultValue='{"jbbn"}'
+                        // defaultValue='{"jbbn"}'
                         >
                           <Select
                             style={{ width: 200 }}
@@ -207,11 +229,11 @@ const Video = () => {
                             disabled
                             placeholder="Select a person"
                             optionFilterProp="children"
-                            // filterOption={filterOption}
-                            // defaultValue={[{
-                            //   value: 'penđing',
-                            //   label: 'penđing',
-                            // }]}
+                          // filterOption={filterOption}
+                          // defaultValue={[{
+                          //   value: 'penđing',
+                          //   label: 'penđing',
+                          // }]}
                           />
                         </Form.Item>
                       </div>

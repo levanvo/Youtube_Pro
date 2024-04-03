@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 export const allUser = async (req, res) => {
     try {
-        const token = req.headers.key_owner;
+        const token = req.headers.authorization;
 
         if (!token) {
             return res.status(403).json({
