@@ -7,6 +7,7 @@ const { TextArea } = Input;
 
 const Video = () => {
   const [open_Add_Video, setOpen_Add_Video] = useState(false);
+  const [link_Video, setLink_Video]=useState("");
 
   const onSearch_Video = (value, _e, info) => {
     console.log(info?.source, value)
@@ -29,6 +30,9 @@ const Video = () => {
     if (!values.chanel_video) {
       values.chanel_video = "levanvo";
     };
+    if(values.link_video.includes("watch?v=")){
+      values.link_video=values.link_video.replace("watch?v=","embed/");
+    };
 
     console.log('Success:', values);
   };
@@ -36,20 +40,29 @@ const Video = () => {
     console.log('Failed:', errorInfo);
   };
 
+  const Preview_video = (event) =>{
+    let linkVideo = event.target.value;
+    if(linkVideo.includes("watch?v=")){
+      linkVideo=linkVideo.replace("watch?v=","embed/");
+    };
+    // https://www.youtube.com/embed/8TyxiwMK3Rk
+    // https://www.youtube.com/watch?v=8TyxiwMK3Rk
+    setLink_Video(linkVideo);
+  };
   const Mood_video = [
     {
       label: 'Vui vẻ', desc: 'Vui vẻ',
-      value: 'funny',
+      value: 'vui',
       emoji: '))',
     },
     {
       label: 'Buồn', desc: 'Buồn',
-      value: 'sad',
+      value: 'buon',
       emoji: '))',
     },
     {
       label: 'Phim ảnh', desc: 'Phim ảnh',
-      value: 'film',
+      value: 'phim',
       emoji: '))',
     },
     {
@@ -59,12 +72,12 @@ const Video = () => {
     },
     {
       label: 'Thư giãn', desc: 'Thư giãn',
-      value: 'relax',
+      value: 'thu_gian',
       emoji: '))',
     },
     {
       label: 'Vlog, Đời sống, cá nhân', desc: 'Vlog, Đời sống, cá nhân',
-      value: 'society',
+      value: 'vlog',
       emoji: '))',
     },
   ];
@@ -88,13 +101,13 @@ const Video = () => {
                 size={"large"}
                 onClose={onClose_Add_Video}
                 open={open_Add_Video}
-                extra={
-                  <Space>
-                    <Button onClick={onClose_Add_Video}>Hủy</Button>
-                    <Button type="primary">Tải lên</Button>
-                  </Space>
-                }><div className="flex">
-                  <div className="w-[100%] border h-[615px]">
+              // extra={
+              //   <Space>
+              //     <Button onClick={onClose_Add_Video}>Hủy</Button>
+              //     <Button type="primary">Tải lên</Button>
+              //   </Space>}
+              ><div className="flex">
+                  <div className="w-[100%]  -mt-6 h-[615px]">
                     <Form name="basic" labelCol={{
                       span: 5,
                     }} wrapperCol={{
@@ -103,9 +116,17 @@ const Video = () => {
                       maxWidth: 600,
                     }} initialValues={{
                       remember: true,
-                    }}
-                      onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+                    }}onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off"
+                    >
+                      <Form.Item>
+                        <div className="flex justify-between w-[37vw] ">
+                          <Button className='w-24' onClick={onClose_Add_Video}>Hủy</Button>
+                          <Button className='w-24' htmlType="submit" type="primary">Tải lên</Button>
+                        </div>
+                      </Form.Item>
+
                       <Form.Item
+                      className='-mt-3'
                         label="Tiêu đề"
                         name="title_video"
                         rules={[
@@ -119,6 +140,7 @@ const Video = () => {
                       </Form.Item>
 
                       <Form.Item
+                        className='-mt-3'
                         label="Nội dung"
                         name="content_video"
                         rules={[
@@ -132,6 +154,7 @@ const Video = () => {
                       </Form.Item>
 
                       <Form.Item
+                        className='-mt-3'
                         label="Chủ đề"
                         name="mood_video"
                         rules={[{
@@ -156,16 +179,17 @@ const Video = () => {
                       </Form.Item>
 
                       <Form.Item
+                        className='-mt-3'
                         label="Nguồn gốc"
                         name="resource_video"
                         rules={[{
                           required: true,
                           message: 'Bắt buộc !',
                         },]}>
-                        <Input placeholder='Nơi lấy vieo này, url,vv ..' />
+                        <Input addonBefore="https:" placeholder='Nơi lấy vieo này, url,vv ..' />
                       </Form.Item>
 
-                      <div className="flex justify-center space-x-5">
+                      <div className="flex justify-center -mt-4 space-x-5">
                         <Form.Item
                           label="Tạo bởi"
                           name="creater_video" >
@@ -175,7 +199,7 @@ const Video = () => {
                         <Form.Item
                           label="Kênh"
                           name="chanel_video"
-                          defaultValue='{"jbbn"}'
+                          // defaultValue='{"jbbn"}'
                         >
                           <Select
                             style={{ width: 200 }}
@@ -184,20 +208,25 @@ const Video = () => {
                             placeholder="Select a person"
                             optionFilterProp="children"
                             // filterOption={filterOption}
-                            defaultValue={[{
-                              value: 'penđing',
-                              label: 'penđing',
-                            }]}
+                            // defaultValue={[{
+                            //   value: 'penđing',
+                            //   label: 'penđing',
+                            // }]}
                           />
                         </Form.Item>
                       </div>
 
-
-                      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                        <Button type="primary" htmlType="submit">
-                          Submit
-                        </Button>
+                      <Form.Item
+                        className='-mt-3'
+                        label="Link video"
+                        name="link_video"
+                        rules={[{
+                          required: true,
+                          message: 'Bắt buộc !',
+                        },]}>
+                        <Input onChange={Preview_video} name='link_video' addonBefore="https:" placeholder='link embed,vv ..' />
                       </Form.Item>
+                      <iframe className='border rounded-md w-[100%]' height={230} src={link_Video} frameBorder="0"></iframe>
                     </Form>
 
                   </div>
