@@ -13,9 +13,13 @@ const Video = (state = Initial, action) => {
             case "add-Video":
                 draft.dataVideo.push(action.payload.data);
                 break;
+            case "onde-Video":
+                const idOne = action.payload;
+                draft.dataVideo = draft.dataVideo.filter((items) => items._id == idOne)
+                break;
             case "remove-Video":
-                const id = action.payload;
-                draft.dataVideo=draft.dataVideo.filter((items)=>items != id)
+                const idRemove = action.payload;
+                draft.dataVideo = draft.dataVideo.filter((items) => items._id != idRemove)
                 break;
             default:
                 return state;

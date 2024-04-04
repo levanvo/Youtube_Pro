@@ -7,15 +7,19 @@ const Initial = {
 const Chanels = (state = Initial, action) => {
     return produce(state, draft => {
         switch (action.type) {
-            case "fetch-Chanels":
+            case "fetch-Chanel":
                 draft.dataChanels = action.payload;
                 return;
-            case "add-Chanels":
+            case "add-Chanel":
                 draft.dataChanels.push(action.payload.data);
                 break;
-            case "remove-Chanels":
-                const id = action.payload;
-                draft.dataChanels=draft.dataChanels.filter((items)=>items != id)
+            case "onde-Chanel":
+                let idOne = action.payload;
+                draft.dataChanels = draft.dataChanels.filter((items) => items._id == idOne)
+                break;
+            case "remove-Chanel":
+                const idRemove = action.payload;
+                draft.dataChanels = draft.dataChanels.filter((items) => items._id != idRemove)
                 break;
             default:
                 return state;

@@ -22,7 +22,6 @@ export const allChanel = async (req, res) => {
 
             //     if (scopes.includes("admin")) {
                     const dataChanels = await Model_Chanels.find();
-                    console.log(dataChanels);
                     return res.status(200).json({
                         message: "All Chanels",
                         dataChanels
@@ -43,12 +42,22 @@ export const allChanel = async (req, res) => {
 
 export const oneChanel = async (req, res) => {
     try {
-        const _idChanel = req.params.id;
-        const dataChanel = await Model_Chanels.findById(_idChanel);
+        let _idChanel = req.params.id;
+        let dataOrigin_Chanels = {};
+
+        if(_idChanel.includes("&_id_Chanels")){
+            _idChanel=_idChanel.replace("&_id_Chanels","");
+            dataOrigin_Chanels = await Model_Chanels.findById(_idChanel);
+        };
+        
+        if(_idChanel.includes("&_idUser_Chanels")){
+            _idChanel=_idChanel.replace("&_idUser_Chanels","");
+            dataOrigin_Chanels = await Model_Chanels.findOne({ID_user_root:_idChanel});
+        };
 
         return res.status(200).json({
             message: "getOne Chanel.",
-            dataChanel
+            dataOrigin_Chanels
         });
     } catch {
         return res.status(400).json({

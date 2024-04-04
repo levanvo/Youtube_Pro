@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MenuVideo from './MenuVideo';
-import { Input, Drawer, Button, Space, Form, Select } from 'antd';
+import { Input, Drawer, Button, Space, Form, Select, message  } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import { get_SessionStorage, instance } from '../../Services/Api';
 
@@ -11,28 +11,31 @@ const Video = () => {
   const [open_Add_Video, setOpen_Add_Video] = useState(false);
   const [signalCreated_Video, setSignalCreate_video]=useState(true);
   const [link_Video, setLink_Video] = useState("");
-  const dispatch = useDispatch();
-  const { dataChanels } = useSelector((items) => items.Info_chanels);
-  const { tokenUser } = get_SessionStorage("user.profile");
+  const [dataChanel_one, setDataChanel_one]=useState({});
+  const [message_Chanel, context_Chanel] = message.useMessage();
+
+  const { tokenUser, _id } = get_SessionStorage("user.profile");
+
 
   const onSearch_Video = (value, _e, info) => {
     console.log(info?.source, value)
   };
 
-  // useEffect(() => {
-  //   const fetchApi_Chanels = async () => {
-  //     const { data } =await instance.get("/all-Chanel", {
-  //       headers: {
-  //         Authorization: tokenUser,
-  //       },
-  //     });
-  //     dispatch({ type: "fetch-Chanels", payload: data.dataChanels });
-  //     if(!data.dataChanels.length){
-  //       setSignalCreate_video(false)
-  //     };
-  //   };
-  //   fetchApi_Chanels();
-  // }, []);
+  useEffect(() => {
+    const one_Chanels = async () => {
+      const { data } =await instance.get(`/one-Chanel/${_id}&_idUser_Chanels`, {
+        headers: {
+          Authorization: tokenUser,
+        },
+      });
+      if(!data.dataOrigin_Chanels || data==null){
+        setSignalCreate_video(false);
+      }else{
+        setDataChanel_one(data.dataOrigin_Chanels);
+      };
+    };
+    one_Chanels();
+  }, []);
   
   // add-Video
 
@@ -48,6 +51,10 @@ const Video = () => {
   // };
 
   const onFinish = (values) => {
+    if(!signalCreated_Video){
+      message_Chanel.error('Hãy tạo kênh trước nhé..');
+    };
+
     if (!values.chanel_video) {
       values.chanel_video = "levanvo";
     };
@@ -67,45 +74,45 @@ const Video = () => {
     if (linkVideo.includes("watch?v=")) {
       linkVideo = linkVideo.replace("watch?v=", "embed/");
     };
-    // https://www.youtube.com/embed/8TyxiwMK3Rk
-    // https://www.youtube.com/watch?v=8TyxiwMK3Rk
+
     setLink_Video(linkVideo);
   };
   const Mood_video = [
     {
       label: 'Vui vẻ', desc: 'Vui vẻ',
       value: 'vui',
-      emoji: '))',
+      emoji: '😚',
     },
     {
       label: 'Buồn', desc: 'Buồn',
       value: 'buon',
-      emoji: '))',
+      emoji: '😟',
     },
     {
       label: 'Phim ảnh', desc: 'Phim ảnh',
       value: 'phim',
-      emoji: '))',
+      emoji: '🎬',
     },
     {
       label: 'Rap', desc: 'Rap',
       value: 'rap',
-      emoji: '))',
+      emoji: '🎧',
     },
     {
       label: 'Thư giãn', desc: 'Thư giãn',
       value: 'thu_gian',
-      emoji: '))',
+      emoji: '😌',
     },
     {
       label: 'Vlog, Đời sống, cá nhân', desc: 'Vlog, Đời sống, cá nhân',
       value: 'vlog',
-      emoji: '))',
+      emoji: '👀',
     },
   ];
 
   return (
     <div className="flex home-shell-outside">
+    {context_Chanel}
       <MenuVideo />
       <div className=" w-[100%] bg-gray-100 h-[87.7vh] ml-2 shell-2 rounded-md">
         <div className="conten_Video p-2">
@@ -227,7 +234,7 @@ const Video = () => {
                             style={{ width: 200 }}
                             className=''
                             disabled
-                            placeholder="Select a person"
+                            placeholder={`${signalCreated_Video?dataChanel_one?.name_chanels:"không xác định !!"}`}
                             optionFilterProp="children"
                           // filterOption={filterOption}
                           // defaultValue={[{

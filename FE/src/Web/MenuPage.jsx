@@ -36,7 +36,7 @@ const MenuPage = () => {
             getItem('Đã thích', '5', <HeartOutlined />),
             getItem('Xem sau', '6', <WalletOutlined />),
         ]),
-        getItem('Kênh của bạn', 'sub2', <AppstoreOutlined />, [
+        getItem('Kênh đăng kí', 'sub2', <AppstoreOutlined />, [
             getItem('null', '9'),
             getItem('null', '10'),
             // getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),

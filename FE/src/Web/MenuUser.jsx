@@ -33,10 +33,7 @@ const MenuUser = () => {
             getItem('Đã thích', '5'),
             getItem('Xem sau', '6'),
         ]),
-        getItem('Kênh của bạn', 'sub2', <AppstoreOutlined />, [
-            getItem('null', '9'),
-            getItem('null', '10'),
-        ]),
+        getItem('Kênh của bạn', '2', <AppstoreOutlined />),
         getItem('USER', 'user-100', <PieChartOutlined />),
     ];
 
