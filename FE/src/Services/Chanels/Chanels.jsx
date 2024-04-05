@@ -11,7 +11,7 @@ const Chanels = (state = Initial, action) => {
                 draft.dataChanels = action.payload;
                 return;
             case "add-Chanel":
-                draft.dataChanels.push(action.payload.data);
+                draft.dataChanels.push(action.payload);
                 break;
             case "onde-Chanel":
                 let idOne = action.payload;

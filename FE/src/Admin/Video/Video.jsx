@@ -66,7 +66,7 @@ const Video = () => {
     console.log('Success:', values);
   };
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    message_Chanel.error("Lỗi thêm video, hãy nhập đầy đủ !!");
   };
 
   const Preview_video = (event) => {
