@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MenuChanels from './MenuChanels';
-import { Input, Drawer, Button, Space, Form, Select, message } from 'antd';
+import { Input, Drawer, Button, Space, Form, Select, message, Popconfirm } from 'antd';
 import { get_SessionStorage, instance } from '../../Services/Api';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -81,7 +81,8 @@ const Chanels = () => {
         Authorization: tokenUser
       }
     });
-    dispatch({type:"actice-Chanel",payload:dataActive});
+    dispatch({ type: "actice-Chanel", payload: dataActive });
+    message.success('Xác nhận hành động');
   };
 
   const Run_chanel = async (_idChanel) => {
@@ -90,10 +91,11 @@ const Chanels = () => {
         Authorization: tokenUser
       }
     });
-    dispatch({type:"actice-Chanel",payload:dataActive});
+    dispatch({ type: "actice-Chanel", payload: dataActive });
+    message.success('Xác nhận hành động');
   };
+  const cancel__Active = (e) => {};
 
-  console.log("dataChanelsdataChanels: ",dataChanels);
   return (
     <div className="flex home-shell-outside shell-Admin-manage">
       {context_Chanel}
@@ -183,9 +185,27 @@ const Chanels = () => {
                     <td className='mt-3'>{items?.subscribes_User_ID?.length}</td>
                     <td>
                       {items?.is_Active ?
-                        <Button onClick={() => Stop_chanel(items?._id)} className='text-white bg-red-500'>Stop</Button>
+                        <Popconfirm
+                          title="Dừng kênh này"
+                          description="Bạn có chắc với hành động này ?"
+                          onConfirm={() => Stop_chanel(items?._id)}
+                          onCancel={cancel__Active}
+                          okText="Đúng"
+                          cancelText="Thôi"
+                        >
+                          <Button className='text-white bg-red-500'>Dừng kênh</Button>
+                        </Popconfirm>
                         :
-                        <Button onClick={() => Run_chanel(items?._id)} className='text-white bg-green-500'>Running</Button>
+                        <Popconfirm
+                          title="Cho phép kênh này hoạt động trở lại"
+                          description="Bạn có chắc với hành động này ?"
+                          onConfirm={() => Run_chanel(items?._id)}
+                          onCancel={cancel__Active}
+                          okText="Đúng"
+                          cancelText="Thôi"
+                        >
+                          <Button className='text-white bg-green-500'>Khởi chạy</Button>
+                        </Popconfirm>
                       }
                     </td>
                   </tr>
