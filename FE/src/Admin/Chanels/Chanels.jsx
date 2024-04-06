@@ -9,7 +9,6 @@ const { TextArea } = Input;
 const Chanels = () => {
   const [message_Chanel, context_Chanel] = message.useMessage();
   const [open_Add_Chanels, setOpen_Add_Chanels] = useState(false);
-  const [signal_Create_chanel, set_signal_Create_chanel] = useState(false);
   const { tokenUser, _id } = get_SessionStorage("user.profile");
   const dispatch = useDispatch();
   const dataChanels = useSelector((chanels) => chanels.Info_chanels).dataChanels;
@@ -26,17 +25,16 @@ const Chanels = () => {
     fetchAPI_chanels();
   }, []);
 
-  useEffect(() => {
-    const fetchOne_Chanel = async () => {
-      const dataOne_chanel = await instance.get(`/one-Chanel/${_id}&_idUser_Chanels`);
-      const oneChanel = dataOne_chanel.data.dataOrigin_Chanels;
+  const fetchOne_Chanel = async () => {
+    const dataOne_chanel = await instance.get(`/one-Chanel/${_id}&_idUser_Chanels`);
+    const oneChanel = dataOne_chanel.data.dataOrigin_Chanels;
 
-      if (oneChanel==null || oneChanel==undefined) {
-        set_signal_Create_chanel(true);
-      };
+    if (oneChanel==null || oneChanel==undefined) {
+      return true;
     };
-    fetchOne_Chanel();
-  }, []);
+
+    return false;
+  };
   const onSearch_Channels = (value, _e, info) => {
     console.log(info?.source, value)
   };
@@ -58,7 +56,8 @@ const Chanels = () => {
       subscribes_User_ID: []
     };
 
-    if (signal_Create_chanel) {
+    const resultOne_chanel =await fetchOne_Chanel();
+    if (resultOne_chanel) {
       const dataChanel_add = await instance.post(`/add-Chanel`, objectChanels, {
         headers: {
           Authorization: tokenUser
