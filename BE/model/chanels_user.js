@@ -25,7 +25,11 @@ const SchemaMG_Chanels = new mongoose.Schema(
         subscribes_User_ID:[{
             type:mongoose.Types.ObjectId,
             ref:"user_infos"
-        }]
+        }],
+        is_Active:{
+            type:Boolean,
+            default:true
+        }
     },{timestamps:true,versionKey:false}
 );
 export default mongoose.model("chanel_user",SchemaMG_Chanels);

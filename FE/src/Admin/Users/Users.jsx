@@ -24,7 +24,7 @@ const Users = () => {
     console.log("dataUser: ", dataUser)
 
     return (
-        <div className="flex home-shell-outside shell-users-manage">
+        <div className="flex home-shell-outside shell-Admin-manage">
             <Menu_Users />
 
             <div className="w-[100%] bg-gray-100 h-[87.7vh] ml-2 shell-2 rounded-md">
@@ -33,20 +33,30 @@ const Users = () => {
                         <h2 className='text-gray-600'>Tài khoản: {dataUser?.length}</h2>
                     </div>
                     <hr />
-                    <div className="shell_list_user w-[100%] h-[81vh] rounded-md select-none ">
-                        {dataUser?.map((items, index) => {
-                            return <div key={index} className="one_one-user flex m-2 cursor-pointer bg-gray-200 hover:bg-gray-300 ">
-                                <div className="flex space-x-20 w-[60vw] ">
-                                    <Image width={50} src={items.picture} />
-                                    <p className='mt-3'>{items.name}</p>
-                                    <p className='mt-3'>{items.email}</p>
-                                </div>
-                                <div className="float-right">
-                                    <p className='mt-3 text-center'>{items.isActive ? "active" : "false"}</p>
-                                </div>
-                            </div>
-                        })}
+                    <div className="shell_list_Admin w-[100%] h-[81vh] rounded-md select-none ">
 
+                        <table className=' w-[100%] rounded-md select-none text-center'>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Ảnh</th>
+                                    <th>Tên</th>
+                                    <th>Email</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {dataUser?.map((items, index) => {
+                                    return <tr key={index} className='hover:bg-gray-200'>
+                                        <td>{index + 1}</td>
+                                        <td>{<Image width={50} src={items.picture} />}</td>
+                                        <td className='mt-3'>{items.name}</td>
+                                        <td className='mt-3'>{items.email}</td>
+                                        <td><p className='mt-3 text-center'>{items.isActive ? "active" : "false"}</p></td>
+                                    </tr>
+                                })}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

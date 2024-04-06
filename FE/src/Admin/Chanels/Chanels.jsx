@@ -29,7 +29,7 @@ const Chanels = () => {
     const dataOne_chanel = await instance.get(`/one-Chanel/${_id}&_idUser_Chanels`);
     const oneChanel = dataOne_chanel.data.dataOrigin_Chanels;
 
-    if (oneChanel==null || oneChanel==undefined) {
+    if (oneChanel == null || oneChanel == undefined) {
       return true;
     };
 
@@ -53,10 +53,11 @@ const Chanels = () => {
       video_ID: [],
       tiktok_shorts_ID: [],
       radio_ID: [],
-      subscribes_User_ID: []
+      subscribes_User_ID: [],
+      is_Active: true
     };
 
-    const resultOne_chanel =await fetchOne_Chanel();
+    const resultOne_chanel = await fetchOne_Chanel();
     if (resultOne_chanel) {
       const dataChanel_add = await instance.post(`/add-Chanel`, objectChanels, {
         headers: {
@@ -74,14 +75,33 @@ const Chanels = () => {
     message_Chanel.error("Lỗi tạo kênh !!");
   };
 
+  const Stop_chanel = async (_idChanel) => {
+    const dataActive = await instance.patch(`/isActive-Chanel/${_idChanel}`, { is_Active: false }, {
+      headers: {
+        Authorization: tokenUser
+      }
+    });
+    dispatch({type:"actice-Chanel",payload:dataActive});
+  };
+
+  const Run_chanel = async (_idChanel) => {
+    const dataActive = await instance.patch(`/isActive-Chanel/${_idChanel}`, { is_Active: true }, {
+      headers: {
+        Authorization: tokenUser
+      }
+    });
+    dispatch({type:"actice-Chanel",payload:dataActive});
+  };
+
+  console.log("dataChanelsdataChanels: ",dataChanels);
   return (
-    <div className="flex home-shell-outside">
+    <div className="flex home-shell-outside shell-Admin-manage">
       {context_Chanel}
       <MenuChanels />
       <div className=" w-[100%] bg-gray-100 h-[87.7vh] ml-2 shell-2 rounded-md">
         <div className="conten_Chanels p-2">
           <div className="shell_title_list_user h-8 flex justify-between">
-            <h2 className='text-gray-600'>Số lượng kênh: 0</h2>
+            <h2 className='text-gray-600'>Số lượng kênh: {dataChanels?.length}</h2>
             <div className="search_video -mt-1">
               <Search style={{ width: '500px' }} placeholder="tìm video..." onSearch={onSearch_Channels} enterButton />
             </div>
@@ -89,7 +109,7 @@ const Chanels = () => {
               <Space><Button type="primary" onClick={showLargeDrawer}>Tạo kênh</Button></Space>
               <Drawer
                 className={``}
-                title={`Biên soạn Video`}
+                title={`Tạo kênh của bạn`}
                 placement="right"
                 size={"large"}
                 onClose={onClose_Add_Chanels}
@@ -129,15 +149,50 @@ const Chanels = () => {
                           },
                         ]}
                       >
-                        <Input placeholder='nhập tên kênh ..' />
+                        <Input maxLength={20} placeholder='nhập tên kênh ..' />
                       </Form.Item>
                     </Form>
 
                   </div>
-                </div></Drawer>
+                </div>
+              </Drawer>
             </div>
           </div>
           <hr />
+          <div className="shell_list_Admin w-[100%] h-[81vh] rounded-md select-none">
+            <table className=' w-[100%] rounded-md select-none text-center'>
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Tên kênh</th>
+                  <th>Videos</th>
+                  <th>Tiktok shorts</th>
+                  <th>Radios</th>
+                  <th>Số người đăng kí</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody>
+                {dataChanels.length > 0 && dataChanels.map((items, index) => {
+                  return <tr key={index} className='hover:bg-gray-200'>
+                    <td>{index + 1}</td>
+                    <td>{items?.name_chanels}</td>
+                    <td className='mt-3'>{items?.video_ID?.length}</td>
+                    <td className='mt-3'>{items?.tiktok_shorts_ID?.length}</td>
+                    <td className='mt-3'>{items?.radio_ID?.length}</td>
+                    <td className='mt-3'>{items?.subscribes_User_ID?.length}</td>
+                    <td>
+                      {items?.is_Active ?
+                        <Button onClick={() => Stop_chanel(items?._id)} className='text-white bg-red-500'>Stop</Button>
+                        :
+                        <Button onClick={() => Run_chanel(items?._id)} className='text-white bg-green-500'>Running</Button>
+                      }
+                    </td>
+                  </tr>
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

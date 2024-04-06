@@ -82,6 +82,24 @@ export const createChanel = async (req, res) => {
     }
 };
 
+export const isActice_Chanel = async (req,res)=>{
+    try{
+        const _idChanel = req.params.id;
+        const dataChange = req.body;
+
+        const dataUpdate = await Model_Chanels.findByIdAndUpdate({_id:_idChanel}, dataChange,{new:true});
+
+        return res.status(200).json({
+            message:"Changed status for chanel.",
+            dataUpdate
+        });
+    }catch{
+        return res.status(400).json({
+            message:"Error catch isActive Chanel."
+        })
+    }
+}
+
 export const removeChanel = async (req, res) => {
     try {
         const _idChanel = req.params.id;

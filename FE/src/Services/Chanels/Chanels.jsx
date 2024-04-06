@@ -11,11 +11,17 @@ const Chanels = (state = Initial, action) => {
                 draft.dataChanels = action.payload;
                 return;
             case "add-Chanel":
-                draft.dataChanels.push(action.payload);
+                let dataAdd = action.payload;
+                draft.dataChanels.push(dataAdd);
                 break;
             case "onde-Chanel":
                 let idOne = action.payload;
                 draft.dataChanels = draft.dataChanels.filter((items) => items._id == idOne)
+                break;
+            case "actice-Chanel":
+                const { data } = action.payload;
+                const { dataUpdate } = data;
+                draft.dataChanels = draft.dataChanels.map((items) => items._id == dataUpdate._id ? items = dataUpdate : items);
                 break;
             case "remove-Chanel":
                 const idRemove = action.payload;
