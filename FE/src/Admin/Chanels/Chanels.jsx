@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 const { Search } = Input;
 const { TextArea } = Input;
 const Chanels = () => {
+  const [resetForm_Chanel]=Form.useForm();
   const [message_Chanel, context_Chanel] = message.useMessage();
   const [open_Add_Chanels, setOpen_Add_Chanels] = useState(false);
   const { tokenUser, _id } = get_SessionStorage("user.profile");
@@ -44,6 +45,7 @@ const Chanels = () => {
   };
 
   const onClose_Add_Chanels = () => {
+    resetForm_Chanel.resetFields();
     setOpen_Add_Chanels(false);
   };
   const onFinish = async (values) => {
@@ -102,7 +104,7 @@ const Chanels = () => {
       <MenuChanels />
       <div className=" w-[100%] bg-gray-100 h-[87.7vh] ml-2 shell-2 rounded-md">
         <div className="conten_Chanels p-2">
-          <div className="shell_title_list_user h-8 flex justify-between">
+          <div className="shell_title_list_chanel h-8 flex justify-between">
             <h2 className='text-gray-600'>Số lượng kênh: {dataChanels?.length}</h2>
             <div className="search_video -mt-1">
               <Search style={{ width: '500px' }} placeholder="tìm kênh..." onSearch={onSearch_Channels} enterButton />
@@ -123,7 +125,7 @@ const Chanels = () => {
               //   </Space>}
               ><div className="flex">
                   <div className="w-[100%]  -mt-6 h-[615px]">
-                    <Form name="basic" labelCol={{
+                    <Form name="basic" form={resetForm_Chanel} labelCol={{
                       span: 5,
                     }} wrapperCol={{
                       span: 16,

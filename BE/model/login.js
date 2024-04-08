@@ -52,6 +52,10 @@ const Model_User = new mongose.Schema(
             type:Array,
             default:[]
         },
+        point_dead_user:{
+            type:Number,
+            default:0
+        },
         isActive:{
             type:Boolean,
             default:true
