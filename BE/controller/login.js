@@ -87,7 +87,6 @@ export const LOGIN = async (req, res, next) => {
                         tokenUser: token
                     };
 
-                    // console.log(dataOriginal);
                     const redirectUrl = 'http://localhost:5173/youtube.com';
                     const queryData = new URLSearchParams(dataOriginal).toString();
                     res.redirect(`${redirectUrl}?${queryData}`);
@@ -124,7 +123,6 @@ export const LOGOUT = async (req, res, next) => {
     // Sau khi thực hiện các bước đăng xuất, chuyển hướng người dùng đến trang đăng nhập hoặc trang khác tùy theo yêu cầu của bạn
     req.session.destroy((err) => {
         if (err) {
-            console.log(err);
             res.send('Error logging out');
         } else {
             res.send('Logged out successfully');

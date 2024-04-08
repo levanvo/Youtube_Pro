@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MenuVideo from './MenuVideo';
-import { Input, Drawer, Button, Space, Form, Select, message  } from 'antd';
+import { Input, Drawer, Button, Space, Form, Select, message } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import { get_SessionStorage, instance } from '../../Services/Api';
 
@@ -9,37 +9,42 @@ const { TextArea } = Input;
 
 const Video = () => {
   const [open_Add_Video, setOpen_Add_Video] = useState(false);
-  const [signalCreated_Video, setSignalCreate_video]=useState(true);
+  const [signalCreated_Video, setSignalCreate_video] = useState(true);
   const [link_Video, setLink_Video] = useState("");
-  const [dataChanel_one, setDataChanel_one]=useState({});
+  const [dataChanel_one, setDataChanel_one] = useState({});
   const [message_Chanel, context_Chanel] = message.useMessage();
 
   const { tokenUser, _id } = get_SessionStorage("user.profile");
 
 
   const onSearch_Video = (value, _e, info) => {
-    console.log(info?.source, value)
+    
   };
 
   useEffect(() => {
     const one_Chanels = async () => {
-      const { data } =await instance.get(`/one-Chanel/${_id}&_idUser_Chanels`, {
+      const { data } = await instance.get(`/one-Chanel/${_id}&_idUser_Chanels`, {
         headers: {
           Authorization: tokenUser,
         },
       });
-      if(!data.dataOrigin_Chanels || data==null){
+      if (!data.dataOrigin_Chanels || data == null || data.dataOrigin_Chanels.is_Active == false) {
         setSignalCreate_video(false);
-      }else{
+      } else {
         setDataChanel_one(data.dataOrigin_Chanels);
       };
     };
     one_Chanels();
   }, []);
-  
+
   // add-Video
 
   const showLargeDrawer = () => {
+    if (!signalCreated_Video) {
+      setOpen_Add_Video(false);
+      message_Chanel.info("Kênh của bạn chưa được tạo hoặc đã bị khóa !");
+      return;
+    }
     setOpen_Add_Video(true);
   };
   const onClose_Add_Video = () => {
@@ -47,23 +52,41 @@ const Video = () => {
   };
 
   // const handleChange = (value) => {
-  //   console.log(`selected ${value}`);
+
   // };
 
-  const onFinish = (values) => {
-    if(!signalCreated_Video){
+  const onFinish = async (values) => {
+    if (!signalCreated_Video) {
       message_Chanel.error('Hãy tạo kênh trước nhé..');
+      return;
     };
 
-    if (!values.chanel_video) {
-      values.chanel_video = "levanvo";
-    };
     if (values.link_video.includes("watch?v=")) {
       values.link_video = values.link_video.replace("watch?v=", "embed/");
     };
+    const { content_video, creater_video, link_video, mood_video, resource_video, title_video } = values;
+    const objectVideo = {
+      title_video: title_video,
+      content: content_video,
+      author: creater_video,
+      link_video: link_video,
+      mood_type: mood_video,
+      Source_root: resource_video,
+      name_chanels: dataChanel_one.name_chanels,
+      chanels_ID: dataChanel_one._id,
+      comments_count: 0,
+      view_count: 0,
+      likes_count: 0,
+      share_count: 0,
+      dislikes_count: 0,
+    };
 
-
-    console.log('Success:', values);
+    const addVideo = await instance.post(`/create-Video`, objectVideo);
+    if (addVideo.status == 200) {
+      message_Chanel.success("Tải lên video thành công.");
+    } else {
+      message_Chanel.error("Lỗi tải lên !!!");
+    };
   };
   const onFinishFailed = (errorInfo) => {
     message_Chanel.error("Lỗi thêm video, hãy nhập đầy đủ !!");
@@ -112,7 +135,7 @@ const Video = () => {
 
   return (
     <div className="flex home-shell-outside">
-    {context_Chanel}
+      {context_Chanel}
       <MenuVideo />
       <div className=" w-[100%] bg-gray-100 h-[87.7vh] ml-2 shell-2 rounded-md">
         <div className="conten_Video p-2">
@@ -234,7 +257,7 @@ const Video = () => {
                             style={{ width: 200 }}
                             className=''
                             disabled
-                            placeholder={`${signalCreated_Video?dataChanel_one?.name_chanels:"không xác định !!"}`}
+                            placeholder={`${signalCreated_Video ? dataChanel_one?.name_chanels : "không xác định !!"}`}
                             optionFilterProp="children"
                           // filterOption={filterOption}
                           // defaultValue={[{
@@ -253,7 +276,7 @@ const Video = () => {
                           required: true,
                           message: 'Bắt buộc !',
                         },]}>
-                        <Input onChange={Preview_video} name='link_video' addonBefore="https:" placeholder='link embed,vv ..' />
+                        <Input onChange={Preview_video} name='link_video' addonBefore="https:" placeholder='link youtube, embed ..' />
                       </Form.Item>
                       <iframe className='border rounded-md w-[100%]' height={230} src={link_Video} frameBorder="0"></iframe>
                     </Form>

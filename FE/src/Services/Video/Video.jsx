@@ -53,7 +53,6 @@ switch (action.type) {
                 const product = action.payload.data
                 draftState.products = draftState.products.map((item: any) => item.id === product.id ? product : item)
                 // draftState.products[product.id] = product;
-                console.log(product);
                 break;
             case "product/deleteProduct":
                 const id = action.payload;

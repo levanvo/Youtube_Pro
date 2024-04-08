@@ -36,7 +36,7 @@ const Chanels = () => {
     return false;
   };
   const onSearch_Channels = (value, _e, info) => {
-    console.log(info?.source, value)
+    
   };
 
   const showLargeDrawer = () => {
@@ -105,7 +105,7 @@ const Chanels = () => {
           <div className="shell_title_list_user h-8 flex justify-between">
             <h2 className='text-gray-600'>Số lượng kênh: {dataChanels?.length}</h2>
             <div className="search_video -mt-1">
-              <Search style={{ width: '500px' }} placeholder="tìm video..." onSearch={onSearch_Channels} enterButton />
+              <Search style={{ width: '500px' }} placeholder="tìm kênh..." onSearch={onSearch_Channels} enterButton />
             </div>
             <div className="add_video -mt-1">
               <Space><Button type="primary" onClick={showLargeDrawer}>Tạo kênh</Button></Space>

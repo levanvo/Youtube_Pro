@@ -21,7 +21,6 @@ const Users = () => {
         fetch();
     }, []);
 
-    console.log("dataUser: ", dataUser)
 
     return (
         <div className="flex home-shell-outside shell-Admin-manage">

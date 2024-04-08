@@ -59,8 +59,6 @@ export const oneUser = async (req, res) => {
         // } else {
         const _idUser = req.params.id;
         const dataUser = await Model_User.findById(_idUser);
-        console.log("_idUser: ", _idUser);
-        console.log("dataUser: ", dataUser);
         return res.status(200).json({
             message: "getOne User.",
             dataUser

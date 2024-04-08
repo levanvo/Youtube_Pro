@@ -20,8 +20,6 @@ export const oneVideo = async (req, res) => {
     try {
         const _idVideo = req.params.id;
         const dataVideo = await Model_Video.findById(_idVideo);
-        // console.log("_idVideo: ", _idVideo);
-        // console.log("dataVideo: ", dataVideo);
         return res.status(200).json({
             message: "getOne Video.",
             dataVideo

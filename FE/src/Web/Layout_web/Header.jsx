@@ -24,7 +24,7 @@ const Header = () => {
   const [isModalOpen_logout, setIsModalOpen_logout] = useState(false);
   const { language, changeLanguage } = useContext(LanguageContext);
 
-  const onSearch = (value, _e, info) => console.log(info?.source, value);
+  const onSearch = (value, _e, info) => {};
   const enterLoading = (index) => {
     setLoadings((prevLoadings) => {
       const newLoadings = [...prevLoadings];

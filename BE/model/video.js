@@ -10,7 +10,7 @@ const Schema_Video =new mongoose.Schema(
             type:Array,
             default:["https://picsum.photos/200/300"]
         },
-        source:{
+        link_video:{
             type:String,
             require:true
         },
