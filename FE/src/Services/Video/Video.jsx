@@ -11,7 +11,7 @@ const Video = (state = Initial, action) => {
                 draft.dataVideo = action.payload;
                 return;
             case "add-Video":
-                draft.dataVideo.push(action.payload.data);
+                draft.dataVideo.push(action.payload);
                 break;
             case "onde-Video":
                 const idOne = action.payload;

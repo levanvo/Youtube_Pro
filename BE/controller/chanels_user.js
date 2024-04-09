@@ -1,4 +1,5 @@
 import Model_Chanels from "../model/chanels_user.js";
+import Model_Videos from "../model/video.js";
 import Model_User from "../model/login.js";
 import jwt from "jsonwebtoken";
 
@@ -100,16 +101,43 @@ export const isActice_Chanel = async (req,res)=>{
     }
 }
 
+const _support_remove_chanel_1 = async (_idChanel,id_video)=>{
+    try{
+        const signalChanel = await Model_Chanels.findByIdAndUpdate(_idChanel,{
+            $pull:{
+                video_ID:id_video
+            }
+        });
+    }catch{
+        console.error("Error support - chanel -1")
+    }
+};
+const _support_remove_chanel_2 = async (_idCVideo)=>{
+    try{
+        const signalChane2 = await Model_Videos.findByIdAndDelete(_idCVideo);
+    }catch{
+        console.error("Error support - chanel -1")
+    }
+};
 export const removeChanel = async (req, res) => {
     try {
         const _idChanel = req.params.id;
+        const authorization_IdVideo = req.headers;
+        const {authorization, id_video} = authorization_IdVideo;
 
-        const dataChanel = await Model_Chanels.findByIdAndDelete(_idChanel);
-
-        return Promise.resolve({
-            message: "deleted Chanel.",
-            dataChanel
-        });
+        if(id_video && id_video != undefined){
+            _support_remove_chanel_1(_idChanel,id_video);
+            _support_remove_chanel_2(id_video);
+            return res.status(200).json({
+                message: "deleted 1 element Chanel + Video.",
+            });
+        }else{
+            const dataChanel = await Model_Chanels.findByIdAndDelete(_idChanel);
+            return res.status(200).json({
+                message: "deleted Chanel.",
+                dataChanel
+            });
+        };
     } catch {
         return res.status(400).json({
             message: "Error remove Chanel !"

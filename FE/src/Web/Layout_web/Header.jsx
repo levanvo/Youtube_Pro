@@ -75,7 +75,7 @@ const Header = () => {
     </div>
   };
   const handleClick_MIC = () => {
-    console.info('You clicked the Chip.');
+    
   };
 
   return (

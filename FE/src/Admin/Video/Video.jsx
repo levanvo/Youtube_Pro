@@ -13,11 +13,10 @@ const Video = () => {
   const [signalCreated_Video, setSignalCreate_video] = useState(true);
   const [link_Video, setLink_Video] = useState("");
   const [dataChanel_one, setDataChanel_one] = useState({});
-  const [dataVideo, setData_Video] = useState([]);
   const [message_Chanel, context_Chanel] = message.useMessage();
-
+  const dispatch = useDispatch();
+  const {dataVideo} = useSelector((itemsVideo)=>itemsVideo.Info_videos);
   const { tokenUser, _id, email } = get_SessionStorage("user.profile");
-
 
   const onSearch_Video = (value, _e, info) => {
 
@@ -30,7 +29,7 @@ const Video = () => {
           Authorization: tokenUser,
         },
       });
-      data.dataVideo && data.dataVideo.length && setData_Video(data.dataVideo);
+      data.dataVideo && data.dataVideo.length && dispatch({type:"fetch-Video", payload: data.dataVideo});
     };
     fetchAPI_Video();
 
@@ -79,7 +78,7 @@ const Video = () => {
     const objectVideo = {
       title_video: title_video,
       content: content_video,
-      author: creater_video,
+      author: email,
       link_video: link_video,
       mood_type: mood_video,
       Source_root: resource_video,
@@ -93,6 +92,7 @@ const Video = () => {
     };
 
     const addVideo = await instance.post(`/create-Video`, objectVideo);
+    dispatch({type:"add-Video", payload:addVideo.dataVideo});
     formAddVideo.resetFields();
     if (addVideo.status == 200) {
       message_Chanel.success("Tải lên video thành công.");
@@ -145,8 +145,14 @@ const Video = () => {
     },
   ];
 
-  const RemoveVideo = async ({idRoot, idChanel})=>{
-    console.log(idChanel, idRoot);
+  const RemoveVideo = async ({idVideo, idChanel})=>{
+    dispatch({type:"remove-Video", payload:idVideo});
+    const removeOne_Chanel = await instance.delete(`remove-Chanel/${idChanel}`,{
+      headers:{
+        Authorization:tokenUser,
+        id_Video:idVideo
+      }
+    });
   };
 
   const cancel__Remove=(e)=>{}
@@ -325,7 +331,7 @@ const Video = () => {
                         <Popconfirm
                           title={`Xóa video này của ${items?.author}, ngừng phát trên toàn quốc !`}
                           description="Bạn chắc chứ ?"
-                          onConfirm={() => RemoveVideo({idRoot:items?._id, idChanel: items?.chanels_ID})}
+                          onConfirm={() => RemoveVideo({idVideo:items?._id, idChanel: items?.chanels_ID})}
                           onCancel={cancel__Remove}
                           okText="Đúng"
                           cancelText="Thôi"
