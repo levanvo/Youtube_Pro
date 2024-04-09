@@ -92,7 +92,7 @@ const Video = () => {
     };
 
     const addVideo = await instance.post(`/create-Video`, objectVideo);
-    dispatch({type:"add-Video", payload:addVideo.dataVideo});
+    dispatch({type:"add-Video", payload:addVideo});
     formAddVideo.resetFields();
     if (addVideo.status == 200) {
       message_Chanel.success("Tải lên video thành công.");
