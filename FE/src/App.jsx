@@ -20,6 +20,7 @@ import Radio from "./Admin/Radio/Radio";
 import Chanels from "./Admin/Chanels/Chanels";
 import Orther from "./Admin/Orther/Orther";
 import Users from "./Admin/Users/Users";
+import Detail_Videos from "./Web/Detail_Videos/Detail_Videos";
 
 function App() {
   const [key_login, setKey_login] = useState(true);
@@ -54,6 +55,7 @@ function App() {
 
         <Route path="/youtube.com" element={<Layout_web />}>
           <Route index element={<HomePage />} />
+          <Route path="detail_video/:id" element={<Detail_Videos />}/>
 
         </Route>
 

@@ -8,7 +8,8 @@ import {
     RightOutlined,
     HeartOutlined,
     WalletOutlined,
-    LeftOutlined
+    LeftOutlined,
+    CustomerServiceOutlined
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 import LanguageContext from '../LanguageProvider';
@@ -32,6 +33,7 @@ const MenuPage = () => {
             getItem('', '0', <div className=' w-[200px] flex justify-center h-[40px] ' onClick={() => toggleCollapsed()}><LeftOutlined /></div>),
         getItem('Trang chủ', '1', <HomeOutlined />),
         getItem('Tiktok shorts', '2', <TikTokOutlined />),
+        getItem('Radios', '3', <CustomerServiceOutlined />),
         getItem('Danh sách', 'sub1', <PlaySquareOutlined />, [
             getItem('Đã thích', '5', <HeartOutlined />),
             getItem('Xem sau', '6', <WalletOutlined />),

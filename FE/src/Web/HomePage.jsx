@@ -3,6 +3,7 @@ import { instance } from '../Services/Api';
 import {
   UpCircleOutlined,
 } from "@ant-design/icons";
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   const [scrollTop, setScrollTop] = useState(true);
@@ -26,13 +27,14 @@ const HomePage = () => {
       <div className='area_Videos flex flex-wrap justify-center w-[100%] h-[100%]'>
         {
           dataVideos?.map((items, index) => {
-            return <div className="w-[27%] h-[40%] mx-7" key={index}>
+            return <div className="w-[27%] h-[40%] mx-7 relative" key={index}>
               <iframe className='w-[100%] h-[70%] rounded-xl' src={items?.link_video} frameBorder="0"></iframe>
               <p>{items?.title_video.length>70 ? (items?.title_video.slice(0,70)+" ..."):items?.title_video}</p>
               <div className="flex justify-between">
                 <p className='text-gray-500 mt-1 ml-3'>Lượt xem: {items.view_count}</p>
                 <p className='text-xs mt-2'>{(items.createdAt.replace("T"," / ")).slice(0,21)}</p>
               </div>
+              <Link to={`detail_video/${items?._id}`}><div className="absolute z-10 h-[70%] w-[100%] bg-black top-0 left-0 opacity-0 cursor-pointer"></div></Link>
             </div>
           })
         }

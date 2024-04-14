@@ -104,16 +104,13 @@ const Header = () => {
       <div className="shell-right-herder flex justify-between h-10 w-full ">
         <div className="shell-r-1 flex space-x-3">
           <Tooltip placement="topLeft" title={"Tổng hợp"}>
-            <Button className='' icon={<DeploymentUnitOutlined />} loading={loadings[999]} onClick={() => enterLoading(999)} />
+            <Button className='bg-gray-400 text-white' icon={<DeploymentUnitOutlined />} loading={loadings[999]} onClick={() => enterLoading(999)} />
           </Tooltip>
           <Tooltip placement="topLeft" title={"Xu hướng"}>
             <Button className='' icon={<RiseOutlined />} loading={loadings[0]} onClick={() => enterLoading(0)} />
           </Tooltip>
           <Tooltip placement="topLeft" title={"Mới cập nhật"}>
             <Button className='' icon={<StarOutlined />} loading={loadings[1]} onClick={() => enterLoading(1)} />
-          </Tooltip>
-          <Tooltip placement="topLeft" title={"Radio ngắn"}>
-            <Button className='' icon={<CustomerServiceOutlined />} loading={loadings[3]} onClick={() => enterLoading(3)} />
           </Tooltip>
         </div>
         <div className="shell-r-2 mt-[20px] mr-6 flex space-x-5">
