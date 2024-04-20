@@ -116,7 +116,7 @@ const _support_remove_chanel_2 = async (_idCVideo)=>{
     try{
         const signalChane2 = await Model_Videos.findByIdAndDelete(_idCVideo);
     }catch{
-        console.error("Error support - chanel -1")
+        console.error("Error support - chanel -2")
     }
 };
 export const removeChanel = async (req, res) => {

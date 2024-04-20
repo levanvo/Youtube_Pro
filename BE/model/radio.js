@@ -29,7 +29,8 @@ const Schema_Radio =new mongoose.Schema(
         chanels_ID:{
             type:mongoose.Types.ObjectId,
             ref:"chanel_users",
-        }
+        },
+        uuid_Radio:String
     },
     {timestamps:true, versionKey:false}
 );

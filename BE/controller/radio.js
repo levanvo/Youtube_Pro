@@ -1,6 +1,7 @@
 import Model_Radio from "../model/radio.js";
 import Model_Chanels from "../model/chanels_user.js";
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from 'uuid';
 
 export const allRadio = async (req, res) => {
     try {
@@ -35,8 +36,9 @@ export const oneRadio = async (req, res) => {
 export const createRadio = async (req, res) => {
     try {
         const data=req.body;
+        const uniqueID = uuidv4();
 
-        const dataRadio = await Model_Radio.create(data);
+        const dataRadio = await Model_Radio.create({...data,uuid_Radio: uniqueID});
         await Model_Chanels.findByIdAndUpdate(dataRadio.chanels_ID,{
             $addToSet:{
                 radio_ID:dataRadio._id,

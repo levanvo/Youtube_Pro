@@ -29,7 +29,8 @@ const Schema_Tiktok_short =new mongoose.Schema(
         chanels_ID:{
             type:mongoose.Types.ObjectId,
             ref:"chanel_users",
-        }
+        },
+        uuid_TiktokShort:String
     },
     {timestamps:true, versionKey:false}
 );

@@ -1,6 +1,7 @@
 import Model_Video from "../model/video.js";
 import Model_Chanels from "../model/chanels_user.js";
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from 'uuid';
 
 export const allVideo = async (req, res) => {
     try {
@@ -34,8 +35,9 @@ export const oneVideo = async (req, res) => {
 export const createVideo = async (req, res) => {
     try {
         const data=req.body;
+        const uniqueID = uuidv4();
 
-        const dataVideo = await Model_Video.create(data);
+        const dataVideo = await Model_Video.create({...data, uuid_Video: uniqueID});
         await Model_Chanels.findByIdAndUpdate(dataVideo.chanels_ID,{
             $addToSet:{
                 video_ID:dataVideo._id,

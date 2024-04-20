@@ -14,12 +14,27 @@ const Video = () => {
   const [link_Video, setLink_Video] = useState("");
   const [dataChanel_one, setDataChanel_one] = useState({});
   const [message_Chanel, context_Chanel] = message.useMessage();
+  const [dataVideo_Sortby, setDataVideo_SortBy]=useState([]);
   const dispatch = useDispatch();
   const {dataVideo} = useSelector((itemsVideo)=>itemsVideo.Info_videos);
   const { tokenUser, _id, email } = get_SessionStorage("user.profile");
 
   const onSearch_Video = (value, _e, info) => {
+    const Value_search = (value.target.value);
+    // let dataMain_Video = dataVideo_Sortby.length>0 ? dataVideo_Sortby : dataVideo;
+    let arraySortBy = [];
+    dataVideo?.map((items)=>{
+      if(items.uuid_Video == Value_search){
+        arraySortBy.push(items);
+      };
+    });
 
+    if(arraySortBy.length){//Value_search.length==36 
+      setDataVideo_SortBy(arraySortBy);
+    }else{
+      setDataVideo_SortBy(dataVideo);
+    };
+    // 47b89100-aa3e-4b16-9b2d-d6a62864bc43
   };
 
   useEffect(() => {
@@ -157,6 +172,16 @@ const Video = () => {
 
   const cancel__Remove=(e)=>{}
 
+  const _handle_ChooseStatus_Video = (value) => {
+    let arraySortBy = [];
+    dataVideo.length && dataVideo.map((items)=>{
+      if(items.mood_type.includes(value)){
+        arraySortBy.push(items);
+      };
+    });
+    arraySortBy.length ? setDataVideo_SortBy(arraySortBy) : setDataVideo_SortBy(dataVideo);
+  };
+
   return (
     <div className="flex home-shell-outside">
       {context_Chanel}
@@ -166,7 +191,26 @@ const Video = () => {
           <div className="shell_title_list_video h-8 flex justify-between">
             <h2 className='text-gray-600'>Video: {dataVideo?.length}</h2>
             <div className="search_video -mt-1">
-              <Search style={{ width: '500px' }} placeholder="tìm video..." onSearch={onSearch_Video} enterButton />
+              {/* <Search style={{ width: '500px' }} placeholder="tìm video..." onSearch={onSearch_Video} enterButton /> */}
+              <Input style={{ width: '400px' }} placeholder="tìm theo UUID..." onChange={onSearch_Video}  />
+            </div>
+            <div className="selector_status_video -mt-1">
+              <Select
+                defaultValue="all_status"
+                onChange={_handle_ChooseStatus_Video}
+                style={{
+                  width: 180,
+                }}
+                options={[
+                  {
+                    value: 'all_status',
+                    label: 'Tất cả',
+                    desc: 'Tất cả',
+                    emoji: '...',
+                  },
+                  ...Mood_video
+                ]}
+              />
             </div>
             <div className="add_video -mt-1">
               <Space><Button type="primary" onClick={showLargeDrawer}>Tải lên mới</Button></Space>
@@ -322,7 +366,8 @@ const Video = () => {
                 </tr>
               </thead>
               <tbody>
-                {dataVideo.length > 0 && dataVideo.map((items, index) => {
+                {(dataVideo_Sortby.length > 0 ? dataVideo_Sortby : dataVideo).map((items, index) => {
+                // { dataVideo_Sortby?.map((items, index) => {
                   return <tr key={index} className='hover:bg-gray-200 cursor-pointer'>
                     <td>{index + 1}</td>
                     <td className='mt-3'>{items?.link_video}</td>

@@ -1,6 +1,7 @@
 import Model_Tiktok_short from "../model/tiktok_short.js";
 import Model_Chanels from "../model/chanels_user.js";
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from 'uuid';
 
 export const allTiktok_short = async (req, res) => {
     try {
@@ -35,8 +36,9 @@ export const oneTiktok_short = async (req, res) => {
 export const createTiktok_short = async (req, res) => {
     try {
         const data=req.body;
+        const uniqueID = uuidv4();
 
-        const dataTiktok_short = await Model_Tiktok_short.create(data);
+        const dataTiktok_short = await Model_Tiktok_short.create({...data, uuid_TiktokShort: uniqueID});
         await Model_Chanels.findByIdAndUpdate(dataTiktok_short.chanels_ID,{
             $addToSet:{
                 tiktok_shorts_ID:dataTiktok_short._id,

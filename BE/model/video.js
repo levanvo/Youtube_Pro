@@ -44,7 +44,8 @@ const Schema_Video =new mongoose.Schema(
         chanels_ID:{
             type:mongoose.Types.ObjectId,
             ref:"chanel_users",
-        }
+        },
+        uuid_Video:String
     },
     {timestamps:true, versionKey:false}
 );
