@@ -7,7 +7,7 @@ import Layout_web from "./Web/Layout_web/Layout_web";
 import NotFound from "./Web/Layout_web/NotFound";
 import url from "url";
 import querystring from "querystring";
-import { set_SessionStorage } from "./Services/Api";
+import { get_SessionStorage, set_SessionStorage } from "./Services/Api";
 import { LanguageProvider } from "./LanguageProvider";
 import Orther_Page from "./Profile/Orther_Page";
 import Layout_Admin from "./Admin/Layout_Admin";
@@ -45,6 +45,12 @@ function App() {
       }
     };
     fetchData();
+
+    const getURL = window.location.href;
+    const privater = get_SessionStorage("user.profile");
+    if(!privater && getURL.includes("youtube.com")){
+      window.location.href=window.location.origin
+    };
   }, []);
 
 
