@@ -2,6 +2,7 @@ import Model_Tiktok_short from "../model/tiktok_short.js";
 import Model_Chanels from "../model/chanels_user.js";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from 'uuid';
+import fetch from "node-fetch";
 
 export const allTiktok_short = async (req, res) => {
     try {
@@ -35,13 +36,13 @@ export const oneTiktok_short = async (req, res) => {
 
 export const createTiktok_short = async (req, res) => {
     try {
-        const data=req.body;
+        const data = req.body;
         const uniqueID = uuidv4();
 
-        const dataTiktok_short = await Model_Tiktok_short.create({...data, uuid_TiktokShort: uniqueID});
-        await Model_Chanels.findByIdAndUpdate(dataTiktok_short.chanels_ID,{
-            $addToSet:{
-                tiktok_shorts_ID:dataTiktok_short._id,
+        const dataTiktok_short = await Model_Tiktok_short.create({ ...data, uuid_TiktokShort: uniqueID });
+        await Model_Chanels.findByIdAndUpdate(dataTiktok_short.chanels_ID, {
+            $addToSet: {
+                tiktok_shorts_ID: dataTiktok_short._id,
             },
         });
 
@@ -72,3 +73,19 @@ export const removeTiktok_short = async (req, res) => {
         })
     }
 };
+
+export const fetch_Tiktok = async (req, res)=>{
+    try {
+        const url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc';
+        const options = {method: 'GET', headers: {accept: 'application/json'}};
+
+        fetch(url, options)
+        .then(res => res.json())
+        .then(json => console.log("json: ",json))
+        .catch(err => console.error('error:' + err));
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+

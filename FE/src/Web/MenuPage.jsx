@@ -3,6 +3,7 @@ import {
     AppstoreOutlined,
     HomeOutlined,
     TikTokOutlined,
+    DesktopOutlined,
     PlaySquareOutlined,
     PieChartOutlined,
     RightOutlined,
@@ -13,6 +14,7 @@ import {
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 import LanguageContext from '../LanguageProvider';
+import { Link } from 'react-router-dom';
 
 
 const MenuPage = () => {
@@ -31,19 +33,20 @@ const MenuPage = () => {
             getItem('', '0', <div className='w-[40px]' onClick={() => toggleCollapsed()}><RightOutlined /></div>)
             :
             getItem('', '0', <div className=' w-[200px] flex justify-center h-[40px] ' onClick={() => toggleCollapsed()}><LeftOutlined /></div>),
-        getItem('Trang chủ', '1', <HomeOutlined />),
-        getItem('Tiktok shorts', '2', <TikTokOutlined />),
-        getItem('Radios', '3', <CustomerServiceOutlined />),
+        getItem(<Link to="">Trang chủ</Link>, '1', <HomeOutlined />),
+        // getItem('Tiktok shorts', '2', <TikTokOutlined />),
+        getItem(<Link to="movie-discover">Movies</Link>, '3', <DesktopOutlined />),
+        getItem(<Link to="">Radio</Link>, '4', <CustomerServiceOutlined />),
         getItem('Danh sách', 'sub1', <PlaySquareOutlined />, [
-            getItem('Đã thích', '5', <HeartOutlined />),
-            getItem('Xem sau', '6', <WalletOutlined />),
+            getItem(<Link to="">Đã thích</Link>, '5', <HeartOutlined />),
+            getItem(<Link to="">Xem sau</Link>, '6', <WalletOutlined />),
         ]),
         getItem('Kênh đăng kí', 'sub2', <AppstoreOutlined />, [
             getItem('null', '9'),
             getItem('null', '10'),
             // getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),
         ]),
-        getItem('Chính sách của chúng tôi', '100', <PieChartOutlined />),
+        getItem(<Link to="">Chính sách của chúng tôi</Link>, '100', <PieChartOutlined />),
     ];
 
     const render_Menu = () => {
